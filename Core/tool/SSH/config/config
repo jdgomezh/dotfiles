@@ -46,9 +46,9 @@
 	# ---------------------------------------------------------------------------------------------------------------------------- #
 	# => mkdir -p <path>
 	# => ssh-keygen -o -a 5000 -t ed25519 -f <path>/<name> -C "<comment>"
-	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*github.com:Siigo-Legacy*' '*/Repo/Corp/siigo/*'"
+	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*github.com:Siigo*' '*/Repo/Corp/siigo/*'"
 		IdentityFile ${ENV_ROOT}/Safe/Mine/pro/siigo/repo/git/github/gome903241@siigo.com
-	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*github.com:Siigo-Legacy*' '*/Repo/Corp/memory/*'"
+	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*github.com:Siigo*' '*/Repo/Corp/memory/*'"
 		IdentityFile ${ENV_ROOT}/Safe/Mine/pro/siigo/repo/git/github/gome903241@siigo.com
 	# **************************************************************************************************************************** #
 
