@@ -46,8 +46,9 @@
 	# ---------------------------------------------------------------------------------------------------------------------------- #
 	# => mkdir -p <path>
 	# => ssh-keygen -o -a 5000 -t ed25519 -f <path>/<name> -C "<comment>"
-	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match_validate.sh '*github.com:Siigo-Legacy*' '*/Repo/Corp/siigo/*'"
-	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match_validate.sh '*github.com:Siigo-Legacy*' '*/Repo/Corp/memory/*'"
+	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*github.com:Siigo-Legacy*' '*/Repo/Corp/siigo/*'"
+		IdentityFile ${ENV_ROOT}/Safe/Mine/pro/siigo/repo/git/github/gome903241@siigo.com
+	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*github.com:Siigo-Legacy*' '*/Repo/Corp/memory/*'"
 		IdentityFile ${ENV_ROOT}/Safe/Mine/pro/siigo/repo/git/github/gome903241@siigo.com
 	# **************************************************************************************************************************** #
 
@@ -67,7 +68,7 @@
 	# ---------------------------------------------------------------------------------------------------------------------------- #
 	# => mkdir -p <path>
 	# => ssh-keygen -o -a 5000 -t ed25519 -f <path>/<name> -C "<comment>"
-	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match_validate.sh '*gitlab.com:gkodo/*' '*/Repo/Nick/gkodo/*'"
+	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*gitlab.com:gkodo/*' '*/Repo/Nick/gkodo/*'"
 		IdentityFile ${ENV_ROOT}/Safe/Mine/com/repo/git/gitlab/dvc.jdgomezh@gmail.com
 	# **************************************************************************************************************************** #
 
@@ -79,7 +80,9 @@
 	# ---------------------------------------------------------------------------------------------------------------------------- #
 	# => mkdir -p <path>
 	# => ssh-keygen -o -a 5000 -t ed25519 -f <path>/<name> -C "<comment>"
-	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match_validate.sh '*github.com:jdgomezh*' '*/Repo/Mine/*'"
+	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*github.com:jdgomezh*' '*/Conf'"
+		IdentityFile ${ENV_ROOT}/Safe/Mine/com/repo/git/github/dvc.jdgomezh@gmail.com
+	Match Exec "${ENV_ROOT}/Conf/Core/tool/SSH/script/match.sh '*github.com:jdgomezh*' '*/Repo/Mine/*'"
 		IdentityFile ${ENV_ROOT}/Safe/Mine/com/repo/git/github/dvc.jdgomezh@gmail.com
 	# **************************************************************************************************************************** #
 
