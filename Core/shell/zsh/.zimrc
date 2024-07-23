@@ -1,0 +1,35 @@
+# //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
+# ZIMFW MODULE CONFIGURATIONS
+# ==================================================================================================================================== #
+# Load various zsh modules for improved functionality and user experience.
+zmodule asciiship
+zmodule zsh-users/zsh-completions --fpath src
+# zmodule completion
+zmodule zsh-users/zsh-autosuggestions
+zmodule git
+zmodule input
+zmodule prompt
+zmodule environment
+zmodule zsh-users/zsh-history-substring-search
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule romkatv/powerlevel10k --use degit
+
+# Configure completion settings for enhanced user experience.
+# This includes caching, using cache, and menu selection.
+zstyle ':zim:completion' completer _complete _ignored _approximate
+zstyle ':completion:*' cache-path ${ZCACHE}/.zsh
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' menu select
+
+# Enable prompt substitution, which allows prompt commands to be executed within the prompt.
+setopt prompt_subst
+
+# Initialize and configure command autocompletion.
+autoload -Uz compinit
+compinit
+
+# Set options to append history from multiple sessions and share history across sessions.
+setopt appendhistory
+setopt sharehistory
+# ==================================================================================================================================== #
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #
