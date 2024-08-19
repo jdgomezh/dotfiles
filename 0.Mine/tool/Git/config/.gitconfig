@@ -25,10 +25,10 @@
 	ff = false														# No permitir fast-forward
 
 [commit]
-	gpgsign = false													# Firma commits automáticamente
+	gpgsign = true													# Firma commits automáticamente
 
 [tag]
-	gpgsign = false													# Firma tags automáticamente
+	gpgsign = true													# Firma tags automáticamente
 
 [diff]
 	colorMovedWS = ignore-all-space									# Ignorar espacios en bloques movidos
@@ -121,17 +121,17 @@
 	}; f"
 
 [includeIf "gitdir/i:**/Repo/4.Entity/Memory/**"]
-	path = ~/-/Conf/4.Entity/Memory/tool/Git/include.gitconfig
+	path = ~/-/Conf/4.Entity/Memory/tool/Git/config/include.gitconfig
 
 [includeIf "gitdir/i:**/Repo/4.Entity/SIIGO/**"]
-	path = ~/-/Conf/4.Entity/SIIGO/tool/Git/include.gitconfig
+	path = ~/-/Conf/4.Entity/SIIGO/tool/Git/config/include.gitconfig
 
 [includeIf "gitdir/i:**/Repo/2.Brand/GKodo/**"]
-	path = ~/-/Conf/2.Brand/GKodo/tool/Git/include.gitconfig
+	path = ~/-/Conf/2.Brand/GKodo/tool/Git/config/include.gitconfig
 
 [includeIf "gitdir/i:**/Repo/0.Mine/**"]
-	path = ~/-/Conf/0.Mine/tool/Git/include.gitconfig
+	path = ~/-/Conf/0.Mine/tool/Git/config/include.gitconfig
 
 [includeIf "gitdir/i:**/Conf/**"]
-	path = ~/-/Conf/0.Mine/tool/Git/include.gitconfig
+	path = ~/-/Conf/0.Mine/tool/Git/config/include.gitconfig
 
