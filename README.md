@@ -47,3 +47,8 @@ Symlink to create by WezTerm:
 ```shell
 ln -sf "${ENV_ROOT}/Conf/0.Mine/terminal/WezTerm/loeader/wezterm.lua" "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 ```
+
+Symlink to create by SSH:
+```shell
+ln -sf "${ENV_ROOT}/Conf/0.Mine/tool/SSH/config/config" "${HOME}/.ssh/config"
+```
