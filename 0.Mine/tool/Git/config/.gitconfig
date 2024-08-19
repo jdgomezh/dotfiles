@@ -1,0 +1,137 @@
+[user]
+	name = John D. Gómez H. <pro.jdgomezh@gmail.com>				# Nombre del usuario
+
+[gpg]
+	program = gpg													# Programa GPG
+
+[init]
+	defaultBranch = RLS/Main										# Rama por defecto en nuevos repos
+
+[fetch]
+	prune = true													# Elimina refs locales de ramas borradas en remoto
+
+[pull]
+	rebase = true													# Rebase en lugar de merge al hacer pull
+
+[push]
+	default = simple												# Estrategia de push predeterminada
+	autoSetupRemote = true											# Configura remoto automáticamente
+
+[merge]
+	autoStash = true												# Auto-stash cambios antes de merge
+	renames = true													# Detecta renombramientos
+	commit = yes													# Commits automáticamente
+	log = 99999														# Número de commits en log de merge
+	ff = false														# No permitir fast-forward
+
+[commit]
+	gpgsign = false													# Firma commits automáticamente
+
+[tag]
+	gpgsign = false													# Firma tags automáticamente
+
+[diff]
+	colorMovedWS = ignore-all-space									# Ignorar espacios en bloques movidos
+	indentHeuristic = true											# Detectar indentación
+	ignoreSpaceChange = false										# Ignorar cambios en la cantidad de espacios
+	ignoreAllSpace = false											# Ignorar todos los cambios de espacios
+	colorMoved = zebra												# Colorea bloques movidos
+	word-diff = color												# Colorea diff por palabras
+	renames = copies												# Detecta renombramientos y copias
+
+[stash]
+	defaultRef = refs/stash/clean									# Rama de stash
+	autocleanExpire = 30											# Expirar stashes antiguos
+	autoclean = true												# Limpiar automáticamente el stash
+
+[status]
+	showUntrackedFiles = all										# Mostrar archivos no rastreados
+	aheadbehind = true												# Mostrar commits adelante y atrás
+
+[color]
+	ui = true														# Color en UI
+	diff = auto														# Color en salida diff
+	status = auto													# Color en salida status
+	branch = auto													# Color en salida branch
+	interactive = auto												# Color en salida interactiva
+
+[color "status"]
+	added = yellow													# Color de archivos añadidos
+	changed = blue													# Color de archivos modificados
+	untracked = magenta												# Color de archivos no rastreados
+	deleted = red													# Color de archivos eliminados
+
+[core]
+	editor = nvim													# Editor predeterminado
+	excludesfile = ~/-/Conf/0.Mine/tool/Git/config/.gitignore		# Archivo de exclusión
+	attributesfile = ~/-/Conf/0.Mine/tool/Git/config/.gitattributes	# Archivo de atributos
+	ignorecase = false												# Distinguir mayúsculas y minúsculas
+	symlinks = true													# No seguir enlaces simbólicos
+	autocrlf = input												# Conversión de fin de línea
+	pager = "less -FRX"												# Paginador
+
+[rebase]
+	autoStash = true												# Auto-stash cambios antes de rebase
+	autosquash = true												# Autosquash commits
+	preserveMerges = true											# Preservar merges
+
+[alias]
+	# Historial gráfico
+	lg = log --graph --abbrev-commit --decorate --date=relative \
+		--format=format:'%C(bold blue)%h%C(reset) - %C(bold green)\
+			(%ar)%C(reset) %C(white)%s%C(reset)%C(dim white)- \
+			%an%C(reset)%C(bold yellow)%d%C(reset)'
+	co = checkout													# Cambiar a rama/estado
+	ci = commit														# Crear commit
+	st = status														# Estado actual
+	br = branch														# Listar/crear/eliminar ramas
+	ts = "tag -s"													# Crear tag firmado
+	mg = merge														# Fusionar cambios
+	last = log -1 HEAD												# Último commit
+	changes = diff HEAD~1 HEAD										# Cambios en último commit
+	ol = log --oneline												# Historial en una línea
+	aa = add --all													# Añadir todos los cambios
+	ss = status -s													# Estado corto
+	ri = rebase -i													# Rebase interactivo
+	tree = log --graph --all --decorate --oneline					# Árbol de commits
+	df = diff --color-words											# Diff por palabras
+	ds = diff --stat												# Estadísticas de diff
+	find = log --all --grep											# Buscar en historial
+	sizes = !git count-objects -vH									# Tamaño de objetos
+	filelog = log -u												# Historial de archivo
+	blame = blame -c												# Quién modificó cada línea
+	ignored = ls-files --others -i --exclude-standard				# Archivos ignorados
+	save = stash push -m											# Guardar cambios en el stash
+	pop = stash pop													# Aplicar el último stash y eliminarlo
+	list = stash list												# Listar los stashes
+	show = stash show -p stash@{N}									# Ver el contenido de un stash en particular
+	bsummary = "!f() { \
+		git branch -a -vv --color=always | column -t; \
+	}; f"
+	bstatus = "!f() { \
+		git status -s -b; \
+		echo '---'; \
+		git branch --show-current; \
+		echo '---'; \
+		git log --oneline -n 5; \
+		echo '---'; \
+		git stash list; \
+		echo '---'; \
+		git branch -a -vv --color=always | column -t; \
+	}; f"
+
+[includeIf "gitdir/i:**/Repo/4.Entity/Memory/**"]
+	path = ~/-/Conf/4.Entity/Memory/tool/Git/include.gitconfig
+
+[includeIf "gitdir/i:**/Repo/4.Entity/SIIGO/**"]
+	path = ~/-/Conf/4.Entity/SIIGO/tool/Git/include.gitconfig
+
+[includeIf "gitdir/i:**/Repo/2.Brand/GKodo/**"]
+	path = ~/-/Conf/2.Brand/GKodo/tool/Git/include.gitconfig
+
+[includeIf "gitdir/i:**/Repo/0.Mine/**"]
+	path = ~/-/Conf/0.Mine/tool/Git/include.gitconfig
+
+[includeIf "gitdir/i:**/Conf/**"]
+	path = ~/-/Conf/0.Mine/tool/Git/include.gitconfig
+
