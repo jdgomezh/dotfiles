@@ -26,7 +26,7 @@ plugin.config = function (PluginSpec, opts)
 	-- @option: theme
 	-- @values: String (e.g., 'tokyonight', 'gruvbox')
 	-- @impact: Sets the color scheme for lualine.
-	opts.options.theme = _G.color_scheme
+	opts.options.theme = _G.lualine_theme
 
 	-- Enable or disable icons in the statusline
 	-- @option: icons_enabled

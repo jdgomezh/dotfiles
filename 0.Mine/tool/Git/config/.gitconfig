@@ -25,10 +25,10 @@
 	ff = false														# No permitir fast-forward
 
 [commit]
-	gpgsign = true													# Firma commits automáticamente
+	#gpgsign = true													# Firma commits automáticamente
 
 [tag]
-	gpgsign = true													# Firma tags automáticamente
+	#gpgsign = true													# Firma tags automáticamente
 
 [diff]
 	colorMovedWS = ignore-all-space									# Ignorar espacios en bloques movidos

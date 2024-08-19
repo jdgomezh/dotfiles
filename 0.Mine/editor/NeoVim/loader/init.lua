@@ -3,7 +3,7 @@
 -- and loads core configurations like options and keymaps.
 
 -- Theme Selected
-_G.theme = "gruvox"
+_G.theme = "monokai"
 
 -- Configuration Paths
 _G.lazy_plugin_config_path = "plugin"
@@ -59,14 +59,17 @@ if theme == "tokyonight" then
 	_G.plugin_theme = "folke/tokyonight.nvim"
 	_G.color_scheme = "tokyonight"
 	_G.config_theme = "tokyonight"
+	_G.lualine_theme = "tokyonight"
 elseif theme == "monokai" then
 	_G.plugin_theme = "tanvirtin/monokai.nvim"
 	_G.color_scheme = "monokai"
 	_G.config_theme = "monokai"
+	_G.lualine_theme = "gruvbox_dark"
 elseif theme == "gruvox" then
-	_G.plugin_theme = "gruvox/gruvox.nvim"
+	_G.plugin_theme = "ellisonleao/gruvbox.nvim"
 	_G.color_scheme = "gruvbox"
 	_G.config_theme = "gruvbox"
+	_G.lualine_theme = "gruvbox_dark"
 end
 
 -- initialize lazy.nvim
