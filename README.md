@@ -1,3 +1,32 @@
+pyenv dependencies:
+```shell
+sudo apt-get install -y \
+    libbz2-dev \
+    libncurses5-dev libncursesw5-dev \
+    libffi-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    zlib1g-dev \
+    liblzma-dev \
+    tk-dev \
+    libgdbm-dev \
+    libnss3-dev \
+    libdb5.3-dev \
+    libexpat1-dev \
+    liblzma-dev \
+    libffi-dev \
+    libbz2-dev \
+    uuid-dev
+```
+
+R dependencies:
+```shell
+sudo apt install -y dirmngr gnupg apt-transport-https software-properties-common
+sudo apt install -y build-essential libcurl4-openssl-dev libssl-dev libxml2-dev cmake clang
+```
+
+
 Required export:
 ```shell
 export ENV_ROOT="/-"

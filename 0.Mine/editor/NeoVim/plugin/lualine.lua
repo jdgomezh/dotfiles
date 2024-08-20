@@ -13,7 +13,7 @@ plugin[1] = 'nvim-lualine/lualine.nvim'
 -- @dependencies:
 --  - folke/tokyonight.nvim: A clean, dark Neovim theme that supports true colors and customization.
 plugin.dependencies = {
-	_G.plugin_theme,
+	_G.theme_manager.get_plugin_theme(),
 }
 
 -- Configuration function for lualine
@@ -26,7 +26,7 @@ plugin.config = function (PluginSpec, opts)
 	-- @option: theme
 	-- @values: String (e.g., 'tokyonight', 'gruvbox')
 	-- @impact: Sets the color scheme for lualine.
-	opts.options.theme = _G.lualine_theme
+	opts.options.theme = _G.theme_manager.get_lualine_theme()
 
 	-- Enable or disable icons in the statusline
 	-- @option: icons_enabled
