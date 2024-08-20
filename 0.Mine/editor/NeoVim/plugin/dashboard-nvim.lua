@@ -7,36 +7,38 @@
 -- It follows the structure expected by lazy.nvim plugin manager.
 local plugin = {}
 
--- Plugin definition for lazy.nvim
+-- Define the Dashboard plugin for lazy.nvim
 -- @plugin: nvimdev/dashboard-nvim - A customizable start screen for Neovim.
--- This plugin allows users to create a personalized start screen with various widgets and shortcuts.
 plugin[1] = 'nvimdev/dashboard-nvim'
 
+-- Load header from external file
+-- The header is loaded from a file to allow easy updates without modifying the Lua configuration.
+-- @file_path: String - Path to the file containing the ASCII art.
+-- @return: String - The contents of the file.
+local function load_header(file_path)
+	local header_lines = {}
+	local file = io.open(file_path, "r")
+	if file then
+		for line in file:lines() do
+			table.insert(header_lines, line)
+		end
+		file:close()
+	end
+	table.insert(header_lines, "")  
+
+	return table.concat(header_lines, '\n')
+end
+
 -- ASCII art header for the Dashboard
--- This header will be displayed at the top of the Dashboard when Neovim starts.
--- The header is defined as a string and split into lines for display purposes.
-local header = [[
-┌──────────────────────────────────────────────────────────────────┐
-│         ██████\  ██\   ██\                 ██\                   │
-│        ██  __██\ ██ | ██  |                ██ |                  │
-│        ██ /  \__|██ |██  /  ██████\   ███████ | ██████\          │
-│        ██ |████\ █████  /  ██  __██\ ██  __██ |██  __██\         │
-│        ██ |\_██ |██  ██<   ██ /  ██ |██ /  ██ |██ /  ██ |        │
-│        ██ |  ██ |██ |\██\  ██ |  ██ |██ |  ██ |██ |  ██ |        │
-│        \██████  |██ | \██\ \██████  |\███████ |\██████  |        │
-│         \______/ \__|  \__| \______/  \_______| \______/         │
-└──────────────────────────────────────────────────────────────────┘
-
-
-]]
+-- The header will be displayed at the top of the Dashboard when Neovim starts.
+local header = load_header(_G.PATHS.env_root .. '/Conf/0.Mine/common/ascii/banner.txt')
 
 -- Function to format text by removing leading and trailing whitespace,
 -- collapsing multiple spaces into one, and padding the text to a fixed length.
 -- @param text: The text to be formatted.
 -- @return: The formatted text with padding.
--- This function ensures that descriptions are uniformly formatted and aligned.
 local function pad(text)
-	text = text:match('^%s*(.-)%s*$') -- Remove leading and trailing whitespace from the text.
+	text = text:match('^%s*(.-)%s*$') -- Remove leading and trailing whitespace.
 	text = text:gsub('%s+', ' ') -- Replace multiple consecutive spaces with a single space.
 
 	-- Define the fixed length for padding.
@@ -50,7 +52,6 @@ local function pad(text)
 	end
 
 	-- Pad the text with spaces and periods to the fixed length.
-	-- Ensures uniform appearance of descriptions in the Dashboard.
 	return text .. ' ' .. string.rep('.', padding)
 end
 
@@ -59,8 +60,7 @@ end
 -- existing items and adding new items to the center section.
 -- @param PluginSpec: The specification of the plugin, detailing its name and dependencies.
 -- @param opts: The options table to configure the plugin, containing user-defined settings.
--- The function modifies the options table to include custom header and center section items.
-plugin.config = function(PluginSpec, opts)
+plugin.config = function(_, opts)
 	-- Load the dashboard module.
 	local dashboard = require('dashboard')
 
@@ -77,7 +77,6 @@ plugin.config = function(PluginSpec, opts)
 	opts.config.center = opts.config.center or {}
 
 	-- Format descriptions of existing items in the center section.
-	-- Ensures that all descriptions have uniform padding.
 	for _, item in ipairs(opts.config.center) do
 		if item.desc then
 			item.desc = pad(item.desc)
@@ -85,35 +84,28 @@ plugin.config = function(PluginSpec, opts)
 	end
 
 	-- Insert a new item for the file browser into the center section.
-	-- The item includes a key binding, icon, description, and action.
 	table.insert(opts.config.center, 1, {
-		key = 'b',
-		icon = ' ',
-		desc = pad('File Browser'),
-		action = 'Telescope file_browser',
+		key = 'b',                           -- Keybinding without brackets
+		icon = ' ',                         -- Icon with appropriate padding for alignment
+		desc = pad('File Browser'),          -- Description padded to match the others
+		action = 'Telescope file_browser',   -- Action to execute
 	})
 
 	-- Apply the configuration options to the dashboard setup.
 	dashboard.setup(opts)
 
 	-- Create an autocommand to set local buffer options for the dashboard filetype.
-	-- Ensures consistent tab and indentation settings specific to the dashboard.
 	vim.api.nvim_create_autocmd('FileType', {
 		pattern = 'dashboard',
 		callback = function()
-			-- @tabstop: Number of spaces for a tab.
-			vim.opt_local.tabstop = 4
-			-- @shiftwidth: Number of spaces for autoindent.
-			vim.opt_local.shiftwidth = 4
-			-- @softtabstop: Number of spaces for tab and backspace.
-			vim.opt_local.softtabstop = 4
-			-- @expandtab: Set to false to use tabs instead of spaces.
-			vim.opt_local.expandtab = false
+			vim.opt_local.tabstop = 4         -- Number of spaces for a tab.
+			vim.opt_local.shiftwidth = 4      -- Number of spaces for autoindent.
+			vim.opt_local.softtabstop = 4     -- Number of spaces for tab and backspace.
+			vim.opt_local.expandtab = false   -- Use tabs instead of spaces.
 		end,
 	})
 end
 
 -- Return the complete configuration table.
--- @return: Table containing all configuration options.
 -- This table is required by lazy.nvim to properly configure and load the plugin.
 return plugin

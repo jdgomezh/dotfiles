@@ -5,7 +5,6 @@ param (
     [string]$dirPattern   # Expected directory pattern to match against the current path
 )
 
-
 # //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
 # LOGGING FUNCTION
 # ==================================================================================================================================== #
@@ -21,10 +20,10 @@ function Write-Log {
     param (
         [string]$message  # The message to log
     )
-    
+
     # Get the current date and time formatted as "yyyy-MM-dd HH:mm:ss"
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    
+
     # Combine the timestamp with the message and append it to the log file
     "$timestamp - $message" | Out-File -FilePath $logFile -Append
 }
@@ -37,7 +36,7 @@ function Write-Log {
 # ==================================================================================================================================== #
 # These functions are designed to support the core functionality of the script by providing
 # essential utilities such as retrieving SSH command information, converting command formats,
-# and normalizing file paths. Each function is isolated to ensure single responsibility, 
+# and normalizing file paths. Each function is isolated to ensure single responsibility,
 # which improves maintainability and testability.
 # ==================================================================================================================================== #
 # -------------------------------------------------------------------------------------------------------- #
@@ -54,17 +53,17 @@ function Get-SshParentCommand {
         while ($true) {
             # Retrieve the current process based on its ID
             $currentProcess = Get-Process -Id $currentPID
-            
+
             # If there is no parent process, break the loop
             if (-not $currentProcess.Parent) {
                 break
             }
-            
+
             # Get the parent process ID and command line
             $parentPID = $currentProcess.Parent.Id
             $parentProcess = Get-Process -Id $parentPID
             $parentCmd = $parentProcess.CommandLine
-            
+
             # Update current PID to the parent PID for the next iteration
             $currentPID = $parentPID
 
@@ -197,10 +196,10 @@ function Main {
     try {
         # Retrieve the parent SSH command
         $parentCmd = Get-SshParentCommand
-        
+
         # Convert the SSH command to a URI
         $sshUriCmd = Convert-SshCommandToUri -sshCmd $parentCmd
-        
+
         # Normalize the current directory path and the provided directory pattern
         $commandPath = ConvertTo-ForwardSlash -path (Get-Location).Path
         $pathPattern = ConvertTo-ForwardSlash -path $pathPattern

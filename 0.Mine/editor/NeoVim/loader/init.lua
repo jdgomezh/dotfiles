@@ -1,62 +1,99 @@
 -- init.lua - Main configuration entry point for Neovim.
--- This file sets up the base configuration paths, initializes the plugin manager,
--- and loads core configurations like options and keymaps.
+-- This file sets up base paths, initializes the plugin manager,
+-- and loads core configurations such as options and keymaps.
+-- It is the central configuration file for Neovim and coordinates the loading
+-- of plugins, themes, and core settings.
 
--- Theme Selected
-local current_theme = 'monokai'
+-- Set the theme to be used
+-- @param selected_theme: String - The name of the theme to be applied. 
+--   Valid options:
+--     'tokyonight': A dark theme with blue and purple tones.
+--     'monokai': A vibrant theme with high contrast.
+--     'gruvbox': A retro groove color scheme.
+local selected_theme = 'monokai'
 
--- Configuration Paths
-_G.plugin_config_path = 'plugin'
-_G.lazy_loader_path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+-- Base Configuration Paths
+-- @global CONFIG_PATHS: Table - Stores paths used for plugin and lazy loader configuration.
+--   Fields:
+--     plugin: String - Path to the plugin configurations.
+--     lazy_loader: String - Path where the lazy.nvim plugin manager is installed.
+_G.CONFIG_PATHS = {
+	plugin = 'plugin',
+	lazy_loader = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+}
 
--- Obtain the real path of the init.lua file
+-- Resolve the absolute path to the init.lua file
+-- @param init_script_path: String - The path of the current init.lua script.
+-- @param absolute_init_path: String - The absolute path resolved from the init_script_path.
 local init_script_path = debug.getinfo(1, 'S').source:sub(2)
 local absolute_init_path = vim.loop.fs_realpath(init_script_path)
 
 -- Normalize path separators for Windows
+-- Converts backslashes to forward slashes if running on Windows.
+-- @condition: Runs only if the system uses backslashes as path separators.
 if package.config:sub(1, 1) == '\\' then
-    absolute_init_path = absolute_init_path:gsub('\\', '/')
+	absolute_init_path = absolute_init_path:gsub('\\', '/')
 end
 
--- Set the environment base path
-_G.env_root = absolute_init_path:match('(.*/)'):gsub('(/[^/]+/[^/]+/[^/]+/[^/]+/[^/]+/)$', '/')
+-- Define base paths
+-- @global PATHS: Table - Stores paths used throughout the configuration.
+--   Fields:
+--     env_root: String - The root directory for the Neovim environment.
+--     config_base: String - The base directory for Neovim configuration files.
+_G.PATHS = {
+	env_root = absolute_init_path:match('(.*/)'):gsub('(/[^/]+/[^/]+/[^/]+/[^/]+/[^/]+/)$', '/'),
+	config_base = absolute_init_path:match('(.*/)'):gsub('/[^/]+/$', '/')
+}
 
--- Set the base directory for the configuration
-_G.config_base_path = absolute_init_path:match('(.*/)'):gsub('/[^/]+/$', '/')
+-- Update Lua package path
+-- This ensures that Lua can load modules from the config_base directory.
+-- @operation: Appends the config_base path to the Lua package path for module resolution.
+package.path = table.concat({
+	_G.PATHS.config_base .. '?.lua',
+	_G.PATHS.config_base .. '?/init.lua',
+	package.path
+}, ';')
 
--- Update the package path for Lua modules
-package.path = _G.config_base_path .. '?.lua;' .. _G.config_base_path .. '?/init.lua;' .. package.path
+-- Add the configuration directory to the runtime path
+-- This allows Neovim to locate configuration files located in the config_base directory.
+vim.opt.rtp:prepend(_G.PATHS.config_base)
 
--- Add the base configuration directory to the runtime path
-vim.opt.rtp:prepend(_G.config_base_path)
+-- Load core configurations
+-- These are essential settings and key mappings required for Neovim's operation.
+require('config.options')  -- General Neovim options such as line numbers, encoding, etc.
+require('config.keymaps')  -- Custom key mappings for improved workflow.
 
--- Core Configurations
-require('config.options') -- Load general Neovim options
-require('config.keymaps') -- Load general NeoVim key mappings
-
--- Plugin Management with lazy.nvim
-if not vim.loop.fs_stat(_G.lazy_loader_path) then
+-- Initialize Plugin Management with lazy.nvim
+-- This section checks if lazy.nvim is installed, and if not, installs it.
+-- lazy.nvim is a plugin manager designed to efficiently load Neovim plugins.
+if not vim.loop.fs_stat(_G.CONFIG_PATHS.lazy_loader) then
 	vim.fn.system({
 		'git',
 		'clone',
 		'--filter=blob:none',
-		'https://github.com/folke/lazy.nvim.git',
+		'git@github.com:folke/lazy.nvim.git',
 		'--branch=stable',
-		_G.lazy_loader_path,
+		_G.CONFIG_PATHS.lazy_loader,
 	})
 end
 
--- Add the lazy plugin path to the runtime path and load lazy.nvim
-vim.opt.rtp:prepend(_G.lazy_loader_path)
+-- Load lazy.nvim
+-- This ensures lazy.nvim is loaded and available for managing plugins.
+vim.opt.rtp:prepend(_G.CONFIG_PATHS.lazy_loader)
 local ok, lazy = pcall(require, 'lazy')
 if not ok then
-	print('Error loading lazy.nvim: ', lazy)
-	return
+	error('Error loading lazy.nvim: ' .. lazy)
 end
 
-_G.theme_manager = require('helper.theme_manager')(current_theme)
+-- Load theme manager and apply the selected theme
+-- The theme manager handles selecting and applying the appropriate color scheme and other theme-related settings.
+-- @operation: Initializes the theme manager with the selected theme.
+_G.theme_manager = require('helper.theme_manager').init(selected_theme)
 
--- initialize lazy.nvim
+-- Setup plugins with lazy.nvim
+-- This section lists all plugins and configurations to be managed by lazy.nvim.
+-- @spec: Table - The specification table containing all plugin configurations.
+-- Each import statement references a specific plugin or set of plugins to be loaded.
 lazy.setup({
 	spec = {
 		-- LazyVim and core imports
@@ -135,8 +172,8 @@ lazy.setup({
 		-- Disableds
 		{ 'iamcco/markdown-preview.nvim', disabled = true, enabled = false },
 		{ 'telescope-fzf-native.nvim', disabled = true, enabled = false },
-		-- Settings
-		{ import = _G.plugin_config_path },
+		-- Plugins and Settings
+		{ import = _G.CONFIG_PATHS.plugin },
 		-- Theme
 		{ import = _G.theme_manager.get_theme_config_file() },
 	},

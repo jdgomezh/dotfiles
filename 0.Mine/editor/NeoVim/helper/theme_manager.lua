@@ -1,49 +1,69 @@
 -- theme_manager.lua - Theme management module for Neovim.
-
-local ThemeData = {}
+-- This module is responsible for managing theme selection and configuration loading in Neovim.
+-- It allows for dynamic theme switching and centralized theme management.
 local ThemeManager = {}
+
+-- Available Themes Configuration
+-- @constant available_themes: Table - Contains configuration details for each supported theme.
+--   Each theme entry consists of:
+--     plugin: String - The plugin repository that provides the theme.
+--     color_scheme: String - The colorscheme command to be executed.
+--     lualine_theme: String - The theme to be used for the lualine status line plugin.
 local available_themes = {
 	tokyonight = {
 		plugin = 'folke/tokyonight.nvim',
-        color_scheme = 'tokyonight',
+		color_scheme = 'tokyonight',
 		lualine_theme = 'tokyonight'
 	},
 	monokai = {
 		plugin = 'tanvirtin/monokai.nvim',
-        color_scheme = 'monokai',
+		color_scheme = 'monokai',
 		lualine_theme = 'gruvbox_dark'
 	},
 	gruvbox = {
 		plugin = 'ellisonleao/gruvbox.nvim',
-        color_scheme = 'gruvbox',
+		color_scheme = 'gruvbox',
 		lualine_theme = 'gruvbox_dark'
 	}
 }
 
-function ThemeManager.get_theme_config_file()
-	return ThemeData.theme_config_file
-end
-
-function ThemeManager.get_plugin_theme()
-    return ThemeData.plugin_theme
-end
-
-function ThemeManager.get_lualine_theme()
-    return ThemeData.lualine_theme
-end
-
-function setup (theme_name)
-	local selected_theme_config = available_themes[theme_name]
-	if not selected_theme_config then
+-- Load Theme Configuration
+-- @function load_theme
+-- @param theme_name: String - The name of the theme to be loaded.
+-- @return: Table - The configuration table for the selected theme.
+-- @error: Raises an error if the theme is not found in the available_themes table.
+local function load_theme(theme_name)
+	local theme_config = available_themes[theme_name]
+	if not theme_config then
 		error('Theme not found: ' .. theme_name)
 	end
-
-	ThemeData.plugin_theme = selected_theme_config.plugin
-	ThemeData.lualine_theme = selected_theme_config.lualine_theme
-
-	ThemeData.theme_config_file = 'theme.' .. selected_theme_config.color_scheme
-
-    return ThemeManager
+	return theme_config
 end
 
-return setup
+-- Initialize the Theme Manager
+-- @function ThemeManager.init
+-- @param theme_name: String - The name of the theme to be initialized.
+-- @return: Table - A table with methods to retrieve theme configurations.
+--   Methods:
+--     get_theme_config_file: Returns the configuration file associated with the selected theme.
+--     get_plugin_theme: Returns the plugin associated with the selected theme.
+--     get_lualine_theme: Returns the lualine theme associated with the selected theme.
+function ThemeManager.init(theme_name)
+	local theme_config = load_theme(theme_name)
+
+	return {
+		get_theme_config_file = function()
+			return 'theme.' .. theme_config.color_scheme
+		end,
+		get_plugin_theme = function()
+			return theme_config.plugin
+		end,
+		get_lualine_theme = function()
+			return theme_config.lualine_theme
+		end
+	}
+end
+
+-- Return the ThemeManager
+-- @return: The ThemeManager table with the init method.
+return ThemeManager

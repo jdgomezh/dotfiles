@@ -1,88 +1,64 @@
--- toggleterm.lua - Configuration for akinsho/toggleterm.nvim plugin.
--- This file sets up ToggleTerm, a plugin that provides a toggleable terminal for Neovim.
--- ToggleTerm allows users to open terminals within Neovim, providing a flexible interface for running shell commands and managing terminal sessions.
+-- tokyonight.lua - Configuration for folke/tokyonight.nvim plugin.
+-- This file sets up the TokyoNight color scheme for Neovim.
+-- The TokyoNight theme is a clean, dark theme with blue and purple tones, designed for a modern and visually appealing coding environment.
 
 -- Main configuration table
--- This table contains all the configuration options for ToggleTerm.
--- It follows the structure expected by lazy.nvim plugin manager.
+-- This table contains all the configuration options for the TokyoNight color scheme.
+-- It is designed to integrate seamlessly with the lazy.nvim plugin manager.
 local plugin = {}
 
--- Plugin definition for lazy.nvim
--- @plugin: akinsho/toggleterm.nvim - A plugin to provide a toggleable terminal within Neovim.
--- This plugin helps in managing terminal sessions within Neovim, allowing users to toggle terminals on and off as needed.
+-- Define the TokyoNight plugin for lazy.nvim
+-- @plugin: folke/tokyonight.nvim - A plugin providing the TokyoNight color scheme for Neovim.
 plugin[1] = 'folke/tokyonight.nvim'
 
--- Configuration function for the ToggleTerm plugin.
--- This function sets up ToggleTerm with custom options, ensuring it integrates well with Neovim's settings.
--- @param PluginSpec: The specification of the plugin, detailing its name and dependencies.
--- @param opts: The options table to configure the plugin, containing user-defined settings.
--- The function modifies the options table to include the necessary settings for ToggleTerm.
-plugin.config = function(PluginSpec, opts)
-	-- Load the toggleterm module.
-	-- @require: Require the toggleterm module for configuration.
+-- Configuration function for the TokyoNight plugin.
+-- This function sets up TokyoNight with custom options to ensure it integrates well with Neovim's settings.
+-- @param PluginSpec: The specification of the plugin.
+-- @param opts: Table - Options table containing user-defined settings for TokyoNight.
+plugin.config = function(_, opts)
+	-- Load the tokyonight module.
 	local tokyonight = require('tokyonight')
 
-	-- Theme style
-	-- @option: tokyonight_style
-	-- @values: 'night', 'storm', 'day'
-	-- @impact: Sets the theme style for tokyonight.
-	vim.g.tokyonight_style = 'night'
+	-- Style selection for TokyoNight
+	-- TokyoNight offers different styles to suit different preferences.
+	-- @option style: String - The style to be used. Options include:
+	--   'storm': A darker style with stormy tones.
+	--   'night': A slightly lighter version of the storm style, but still dark.
+	--   'day': A light version suitable for bright environments.
+	opts.style = 'night'
 
-	-- Enable terminal colors
-	-- @option: tokyonight_terminal_colors
-	-- @values: Boolean (true to enable, false to disable)
-	-- @impact: Enables terminal colors for tokyonight.
-	vim.g.tokyonight_terminal_colors = true
-
-	-- Italicize comments
-	-- @option: tokyonight_italic_comments
-	-- @values: Boolean (true to enable, false to disable)
-	-- @impact: Italicizes comments in the tokyonight theme.
-	vim.g.tokyonight_italic_comments = true
-
-	-- Italicize keywords
-	-- @option: tokyonight_italic_keywords
-	-- @values: Boolean (true to enable, false to disable)
-	-- @impact: Italicizes keywords in the tokyonight theme.
-	vim.g.tokyonight_italic_keywords = true
-
-	-- Italicize functions
-	-- @option: tokyonight_italic_functions
-	-- @values: Boolean (true to enable, false to disable)
-	-- @impact: Italicizes functions in the tokyonight theme.
-	vim.g.tokyonight_italic_functions = false
-
-	-- Italicize variables
-	-- @option: tokyonight_italic_variables
-	-- @values: Boolean (true to enable, false to disable)
-	-- @impact: Italicizes variables in the tokyonight theme.
-	vim.g.tokyonight_italic_variables = false
-
-	-- Transparent background
-	-- @option: tokyonight_transparent
-	-- @values: Boolean (true to enable, false to disable)
-	-- @impact: Enables a transparent background in the tokyonight theme.
-	vim.g.tokyonight_transparent = false
-
-	-- Transparent sidebar
-	-- @option: tokyonight_transparent_sidebar
-	-- @values: Boolean (true to enable, false to disable)
-	-- @impact: Enables a transparent sidebar in the tokyonight theme.
-	vim.g.tokyonight_transparent_sidebar = false
-
-	-- Hide inactive statusline
-	-- @option: tokyonight_hide_inactive_statusline
-	-- @values: Boolean (true to enable, false to disable)
-	-- @impact: Hides the statusline when inactive in the tokyonight theme.
-	vim.g.tokyonight_hide_inactive_statusline = false
+	-- Theme customization options
+	-- These options control various aspects of the TokyoNight theme's appearance.
+	opts.transparent = false			-- Disable transparency for a more consistent look.
+	opts.terminal_colors = true			-- Uses terminal colors for consistency across different environments.
+	opts.italic_comments = true			-- Italicizes comments to provide a more dynamic look.
+	opts.bold_keywords = true			-- Makes keywords bold for better visibility.
+	opts.underline_functions = false	-- Disables underlining of function names to keep the interface clean.
+	opts.current_line_bg = true			-- Highlights the background of the current line to maintain focus.
 
 	-- Apply the colorscheme
-	-- @cmd: colorscheme tokyonight
-	-- @impact: Applies the tokyonight colorscheme.
-	vim.cmd[[colorscheme tokyonight-night]]
+	-- This command sets the TokyoNight colorscheme with the specified style and options.
+	vim.cmd[[colorscheme tokyonight]]
+
+	-- Set up TokyoNight with the configured options
+	tokyonight.setup(opts)
+
+	-- Additional Neovim visual settings
+	-- These settings enhance the overall visual experience by enabling 24-bit colors and highlighting.
+	vim.opt.termguicolors = true	-- Enables 24-bit RGB colors in the terminal.
+	vim.opt.cursorline = true		-- Highlights the current line where the cursor is located.
+	vim.opt.background = "dark"		-- Sets the background to dark mode, matching the TokyoNight theme.
+
+	-- Customize diagnostic colors
+	-- These settings adjust the color of diagnostic messages (e.g., errors, warnings) to ensure they are easily distinguishable.
+	vim.cmd([[
+		highlight DiagnosticError guifg=#ff5370
+		highlight DiagnosticWarn guifg=#ffc777
+		highlight DiagnosticInfo guifg=#82aaff
+		highlight DiagnosticHint guifg=#c3e88d
+	]])
 end
 
 -- Return the complete configuration table.
--- @return: Table containing all configuration options.
 -- This table is required by lazy.nvim to properly configure and load the plugin.
 return plugin
