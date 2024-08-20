@@ -124,6 +124,57 @@ fi
 
 
 # //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
+# OMNISHARP CONFIGURATION
+# ==================================================================================================================================== #
+# Define the OmniSharp directory based on the XDG_DATA_HOME environment variable
+export OMNISHARP_DIR="${XDG_DATA_HOME}/omnisharp"
+
+# If the OmniSharp executable does not exist or is not executable, proceed with installation.
+if [ ! -x "${OMNISHARP_DIR}/OmniSharp" ]; then
+	# Define the OmniSharp version to download
+	OMNISHARP_VERSION="v1.37.17"
+
+	# Determine the correct URL to download the OmniSharp package based on the OS.
+	case "$OSTYPE" in
+		linux-gnu*)
+			PACKAGE_URL="https://github.com/OmniSharp/omnisharp-roslyn/releases/download/${OMNISHARP_VERSION}/omnisharp-linux-x64.zip"
+			;;
+		darwin*)
+			PACKAGE_URL="https://github.com/OmniSharp/omnisharp-roslyn/releases/download/${OMNISHARP_VERSION}/omnisharp-osx.zip"
+			;;
+		*)
+			# If the OS is not supported, clean up and exit with an error.
+			echo "Unsupported OS type: $OSTYPE"
+			rm -rf "${TEMP_DIR}"
+			return 1 2>/dev/null || exit 1
+			;;
+	esac
+
+	# Clean up any previous installations
+	rm -rf "${OMNISHARP_DIR}"
+
+	# Create a temporary directory for downloading the OmniSharp package
+	OMNISHARP_TEMP_DIR=$(mktemp -d)
+
+	# Use curl to download the OmniSharp package to the temporary directory.
+	curl -L "$PACKAGE_URL" -o "${OMNISHARP_TEMP_DIR}/omnisharp.zip"
+
+	# Unzip the downloaded package into the OmniSharp directory
+	unzip "${OMNISHARP_TEMP_DIR}/omnisharp.zip" -d "${OMNISHARP_DIR}"
+	rm -rf "${OMNISHARP_TEMP_DIR}"
+
+	# Rename the run file to omnisharp and ensure it is executable.
+	mv "${OMNISHARP_DIR}/run" "${OMNISHARP_DIR}/OmniSharp"
+	chmod +x "${OMNISHARP_DIR}/OmniSharp"
+fi
+
+# Add OmniSharp to PATH
+PATH="${OMNISHARP_DIR}:${PATH}"
+# ==================================================================================================================================== #
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #
+
+
+# //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
 # NEOVIM CONFIGURATION
 # ==================================================================================================================================== #
 export NEOVIM_DIR="/opt/nvim-linux64"
