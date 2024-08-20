@@ -17,7 +17,7 @@ param (
 $logFile = "$HOME/.ssh/ssh_log.log"
 
 # Function to log messages with a timestamp to a designated log file
-function Log-Message {
+function Write-Log {
     param (
         [string]$message  # The message to log
     )
@@ -163,7 +163,7 @@ function Convert-SshCommandToUri {
 # to forward slashes (/). This is particularly important for cross-platform compatibility
 # as Windows uses backslashes by default, while Unix-like systems use forward slashes.
 # -------------------------------------------------------------------------------------------------------- #
-function Normalize-Path {
+function ConvertTo-ForwardSlash {
     param (
         [string]$path  # The file path to normalize
     )
@@ -202,16 +202,16 @@ function Main {
         $sshUriCmd = Convert-SshCommandToUri -sshCmd $parentCmd
         
         # Normalize the current directory path and the provided directory pattern
-        $commandPath = Normalize-Path -path (Get-Location).Path
-        $pathPattern = Normalize-Path -path $pathPattern
+        $commandPath = ConvertTo-ForwardSlash -path (Get-Location).Path
+        $pathPattern = ConvertTo-ForwardSlash -path $pathPattern
 
         # Validate the SSH URI and current directory against the provided patterns
         if ($sshUriCmd -match $sshUriPattern -or $commandPath -match $pathPattern) {
-            #Log-Message -message "Success Matched (SSH URI Command: $sshUriCmd, Command Path: $commandPath - SSH URI Pattern: $sshUriPattern, Command Path Pattern: $pathPattern)"
+            #Write-Log -message "Success Matched (SSH URI Command: $sshUriCmd, Command Path: $commandPath - SSH URI Pattern: $sshUriPattern, Command Path Pattern: $pathPattern)"
             exit 0
         }
         else {
-            #Log-Message -message "Failed Matched (SSH URI Command: $sshUriCmd, Command Path: $commandPath - SSH URI Pattern: $sshUriPattern, Command Path Pattern: $pathPattern)"
+            #Write-Log -message "Failed Matched (SSH URI Command: $sshUriCmd, Command Path: $commandPath - SSH URI Pattern: $sshUriPattern, Command Path Pattern: $pathPattern)"
             exit 1
         }
     }
@@ -235,11 +235,11 @@ try {
     Main -sshUriPattern $sshPattern -pathPattern $dirPattern
 }
 catch {
-    #Log-Message -message "An unexpected error occurred: $_"
+    #Write-Log -message "An unexpected error occurred: $_"
     exit 1  # Ensure a non-zero exit code in case of failure
 }
 finally {
-    #Log-Message -message "Script execution completed."
+    #Write-Log -message "Script execution completed."
 }
 # ==================================================================================================================================== #
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #

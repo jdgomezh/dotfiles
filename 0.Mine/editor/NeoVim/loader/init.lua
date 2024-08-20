@@ -135,8 +135,8 @@ lazy.setup({
 		{ import = "lazyvim.plugins.extras.lang.angular", lazy = true },
 		{ import = "lazyvim.plugins.extras.lang.python", lazy = true },
 		{ import = "lazyvim.plugins.extras.lang.docker", lazy = true },
-		-- { import = 'lazyvim.plugins.extras.lang.clangd', lazy=true },
-		-- { import = 'lazyvim.plugins.extras.lang.cmake', lazy=true },
+		{ import = 'lazyvim.plugins.extras.lang.clangd', lazy=true },
+		{ import = 'lazyvim.plugins.extras.lang.cmake', lazy=true },
 		{ import = "lazyvim.plugins.extras.lang.yaml", lazy = true },
 		{ import = "lazyvim.plugins.extras.lang.json", lazy = true },
 		{ import = "lazyvim.plugins.extras.lang.java", lazy = true },
@@ -146,7 +146,7 @@ lazy.setup({
 		{ import = "lazyvim.plugins.extras.lang.php", lazy = true },
 		{ import = "lazyvim.plugins.extras.lang.vue", lazy = true },
 		{ import = "lazyvim.plugins.extras.lang.sql", lazy = true },
-		-- { import = 'lazyvim.plugins.extras.lang.go', lazy=true },
+		{ import = 'lazyvim.plugins.extras.lang.go', lazy=true },
 		{ import = "lazyvim.plugins.extras.lang.r", lazy = true },
 		-- Disableds
 		{ "iamcco/markdown-preview.nvim", disabled = true, enabled = false },
@@ -157,7 +157,3 @@ lazy.setup({
 		{ import = "theme." .. _G.config_theme },
 	},
 })
-
--- Symlinks for Neovim Configuration
--- @note: These commands should be run in the terminal to create the necessary symlinks.
--- Adjust the paths as needed based on your configuration directory structure.
