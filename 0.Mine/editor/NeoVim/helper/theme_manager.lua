@@ -10,21 +10,22 @@ local ThemeManager = {}
 --     color_scheme: String - The colorscheme command to be executed.
 --     lualine_theme: String - The theme to be used for the lualine status line plugin.
 local available_themes = {
+	catppuccin = {
+		plugin = 'catppuccin/nvim',
+		lualine_theme = 'catppuccin'
+	},
 	tokyonight = {
 		plugin = 'folke/tokyonight.nvim',
-		color_scheme = 'tokyonight',
 		lualine_theme = 'tokyonight'
 	},
 	monokai = {
 		plugin = 'tanvirtin/monokai.nvim',
-		color_scheme = 'monokai',
 		lualine_theme = 'gruvbox_dark'
 	},
 	gruvbox = {
 		plugin = 'ellisonleao/gruvbox.nvim',
-		color_scheme = 'gruvbox',
 		lualine_theme = 'gruvbox_dark'
-	}
+	},
 }
 
 -- Load Theme Configuration
@@ -53,7 +54,7 @@ function ThemeManager.init(theme_name)
 
 	return {
 		get_theme_config_file = function()
-			return 'theme.' .. theme_config.color_scheme
+			return 'theme.' .. theme_name
 		end,
 		get_plugin_theme = function()
 			return theme_config.plugin

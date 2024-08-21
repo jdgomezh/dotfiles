@@ -7,6 +7,7 @@
 -- Set the theme to be used
 -- @param selected_theme: String - The name of the theme to be applied. 
 --   Valid options:
+--     'catppuccin': A light theme with blue and purple tones.
 --     'tokyonight': A dark theme with blue and purple tones.
 --     'monokai': A vibrant theme with high contrast.
 --     'gruvbox': A retro groove color scheme.
@@ -97,11 +98,13 @@ _G.theme_manager = require('helper.theme_manager').init(selected_theme)
 lazy.setup({
 	spec = {
 		-- LazyVim and core imports
-		{ 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
+		{ 'LazyVim/LazyVim', import = 'lazyvim.plugins', opts = {  colorscheme = selected_theme } },
 		-- Plugins UI
 		{ import = 'lazyvim.plugins.extras.ui.treesitter-context', lazy = true },
 		{ import = 'lazyvim.plugins.extras.ui.mini-indentscope', lazy = true },
 		{ import = 'lazyvim.plugins.extras.ui.mini-animate', lazy = true },
+		{ import = 'lazyvim.plugins.extras.ui.mini-starter', lazy = true },
+		{ import = 'lazyvim.plugins.extras.ui.alpha', lazy = true },
 		{ import = 'lazyvim.plugins.extras.ui.edgy', lazy = true },
 		-- Plugins Editor
 		{ import = 'lazyvim.plugins.extras.editor.refactoring', lazy = true },
@@ -119,9 +122,9 @@ lazy.setup({
 		-- Plugins Coding
 		{ import = 'lazyvim.plugins.extras.coding.mini-surround', lazy = true },
 		{ import = 'lazyvim.plugins.extras.coding.mini-comment', lazy = true },
-		{ import = 'lazyvim.plugins.extras.coding.copilot-chat', lazy = true, cmd = 'Copilot' },
-		{ import = 'lazyvim.plugins.extras.coding.copilot', lazy = true },
-		{ import = 'lazyvim.plugins.extras.coding.codeium', lazy = true },
+		-- { import = 'lazyvim.plugins.extras.coding.copilot-chat', lazy = true, cmd = 'Copilot' },
+		-- { import = 'lazyvim.plugins.extras.coding.copilot', lazy = true },
+		-- { import = 'lazyvim.plugins.extras.coding.codeium', lazy = true },
 		{ import = 'lazyvim.plugins.extras.coding.luasnip', lazy = true },
 		{ import = 'lazyvim.plugins.extras.coding.neogen', lazy = true, cmd = 'Neogen' },
 		{ import = 'lazyvim.plugins.extras.coding.yanky', lazy = true },
@@ -167,8 +170,8 @@ lazy.setup({
 		{ import = 'lazyvim.plugins.extras.lang.php', lazy = true },
 		{ import = 'lazyvim.plugins.extras.lang.vue', lazy = true },
 		{ import = 'lazyvim.plugins.extras.lang.sql', lazy = true },
-		--{ import = 'lazyvim.plugins.extras.lang.go', lazy = true },
-		{ import = 'lazyvim.plugins.extras.lang.r', lazy = true },
+		-- { import = 'lazyvim.plugins.extras.lang.go', lazy = true },
+		-- { import = 'lazyvim.plugins.extras.lang.r', lazy = true },
 		-- Disableds
 		{ 'iamcco/markdown-preview.nvim', disabled = true, enabled = false },
 		{ 'telescope-fzf-native.nvim', disabled = true, enabled = false },

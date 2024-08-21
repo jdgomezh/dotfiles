@@ -2,60 +2,59 @@
 -- This file sets up Telescope, a highly extendable fuzzy finder over lists.
 -- Telescope is used to provide a powerful and flexible interface for searching and navigating files, buffers, and more.
 
--- Main configuration table
--- This table contains all the configuration options for Telescope.
+-- Define the main configuration table for the plugin
 local plugin = {}
 
--- Define the Telescope plugin for lazy.nvim
--- @plugin: nvim-telescope/telescope.nvim - A highly extendable fuzzy finder over lists.
+-- Specify the plugin repository
+-- @plugin[1]: String - The repository of the plugin to be installed.
+-- 'nvim-telescope/telescope.nvim': A highly extendable fuzzy finder over lists.
 plugin[1] = 'nvim-telescope/telescope.nvim'
 
 -- Define plugin dependencies
--- These dependencies are required for Telescope to function properly.
+-- Dependencies are other plugins required for this plugin to work correctly.
+-- @dependencies: Table - List of dependencies required by telescope.nvim.
+-- 'nvim-telescope/telescope-symbols.nvim': Extension for finding and inserting symbols.
+-- 'nvim-telescope/telescope-ui-select.nvim': Extension that provides a UI select interface.
+-- 'nvim-telescope/telescope-file-browser.nvim': Extension that provides a file browser interface.
 plugin.dependencies = {
-	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope-symbols.nvim',
 	'nvim-telescope/telescope-ui-select.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
-	'nvim-telescope/telescope-symbols.nvim',
 }
 
--- Configuration function for the Telescope plugin.
--- This function sets up Telescope with custom options, extending preexisting configurations.
--- @param PluginSpec: The specification of the plugin.
--- @param opts: The options table to configure the plugin.
-plugin.config = function(_, opts)
-	-- Load Telescope and its required modules.
-	local telescope = require('telescope')
-	local actions = require('telescope.actions')
-	local previewers = require('telescope.previewers')
-
-	-- Set default options for Telescope.
+-- Function to configure the plugin
+-- This function sets up default options for Telescope.
+-- @param self: LazyPlugin - The plugin object that is being configured.
+-- @param opts: Table - A table containing the options for configuring telescope.nvim.
+plugin.opts = function(_, opts)
+	-- Ensure that pre-existing configurations in opts are preserved
+	-- This prevents overwriting user-defined configurations.
+	opts = opts or {}
 	opts.defaults = opts.defaults or {}
-	opts.defaults.layout_strategy = 'flex'
-	opts.defaults.sorting_strategy = 'ascending'
+	
+	-- Override default configurations
+	-- @winblend: Integer (0-100) - Controls the transparency of Telescope windows.
+	-- 0: Fully opaque window.
+	-- 100: Fully transparent window.
 	opts.defaults.winblend = 5
 
-	-- Setup Telescope with the custom options.
-	telescope.setup(opts)
+	-- @layout_strategy: String - Defines the layout strategy for Telescope windows.
+	-- 'flex': Automatically switches between vertical and horizontal layouts based on window size.
+	-- 'horizontal': Always uses a horizontal layout.
+	-- 'vertical': Always uses a vertical layout.
+	opts.defaults.layout_strategy = 'flex'
 
-	-- Load Telescope extensions.
-	pcall(function()
-		telescope.load_extension('ui-select')
-		telescope.load_extension('file_browser')
-		telescope.load_extension('live_grep_args')
-	end)
+	-- @sorting_strategy: String - Defines the sorting strategy for Telescope results.
+	-- 'ascending': Sorts results in ascending order (from top to bottom).
+	-- 'descending': Sorts results in descending order (from bottom to top).
+	opts.defaults.sorting_strategy = 'ascending'
 
-	-- Define key mappings for Telescope functions.
-	local key_mappings = {
-		{ 'n', '<Leader>tfb', "<cmd>lua require('telescope').extensions.file_browser.file_browser()<CR>", { noremap = true, silent = true } },
-	}
-
-	-- Apply key mappings.
-	for _, mapping in ipairs(key_mappings) do
-		vim.api.nvim_set_keymap(unpack(mapping))
-	end
+	-- Return the configured options
+	-- @return: The modified opts table with updated configurations.
+	return opts
 end
 
--- Return the complete configuration table.
--- This table is required by lazy.nvim to properly configure and load the plugin.
+-- Return the complete configuration table
+-- This is required by lazy.nvim to properly configure and load the plugin.
+-- @return: Table - The plugin configuration to be loaded by lazy.nvim.
 return plugin

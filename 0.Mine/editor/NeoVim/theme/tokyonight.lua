@@ -1,64 +1,75 @@
--- tokyonight.lua - Configuration for folke/tokyonight.nvim plugin.
--- This file sets up the TokyoNight color scheme for Neovim.
--- The TokyoNight theme is a clean, dark theme with blue and purple tones, designed for a modern and visually appealing coding environment.
+-- tokyonight.lua - Configuration for Tokyonight colorscheme with LazyVim integration.
+-- This file sets up the Tokyonight colorscheme for Neovim, with a focus on a modern and visually pleasing aesthetic.
 
--- Main configuration table
--- This table contains all the configuration options for the TokyoNight color scheme.
--- It is designed to integrate seamlessly with the lazy.nvim plugin manager.
+-- Define the main configuration table for the plugin
 local plugin = {}
 
--- Define the TokyoNight plugin for lazy.nvim
--- @plugin: folke/tokyonight.nvim - A plugin providing the TokyoNight color scheme for Neovim.
+-- Specify the plugin repository
+-- @plugin[1]: String - The repository of the plugin to be installed.
+-- 'folke/tokyonight.nvim': A sleek and modern colorscheme inspired by Tokyo at night.
 plugin[1] = 'folke/tokyonight.nvim'
 
--- Configuration function for the TokyoNight plugin.
--- This function sets up TokyoNight with custom options to ensure it integrates well with Neovim's settings.
--- @param PluginSpec: The specification of the plugin.
--- @param opts: Table - Options table containing user-defined settings for TokyoNight.
-plugin.config = function(_, opts)
-	-- Load the tokyonight module.
-	local tokyonight = require('tokyonight')
+-- Function to configure the plugin
+-- This function sets up the colorscheme options, including the style, transparency, and integrations.
+-- @param self: LazyPlugin - The plugin object that is being configured.
+-- @param opts: Table - A table containing the options for configuring Tokyonight.
+plugin.opts = function(_, opts)
+	-- Ensure that pre-existing configurations in opts are preserved
+	-- This prevents overwriting user-defined configurations.
+	opts = opts or {}
+	opts.integrations = opts.integrations or {}
 
-	-- Style selection for TokyoNight
-	-- TokyoNight offers different styles to suit different preferences.
-	-- @option style: String - The style to be used. Options include:
-	--   'storm': A darker style with stormy tones.
-	--   'night': A slightly lighter version of the storm style, but still dark.
-	--   'day': A light version suitable for bright environments.
-	opts.style = 'night'
+	-- Override default configurations for Tokyonight
 
-	-- Theme customization options
-	-- These options control various aspects of the TokyoNight theme's appearance.
-	opts.transparent = false			-- Disable transparency for a more consistent look.
-	opts.terminal_colors = true			-- Uses terminal colors for consistency across different environments.
-	opts.italic_comments = true			-- Italicizes comments to provide a more dynamic look.
-	opts.bold_keywords = true			-- Makes keywords bold for better visibility.
-	opts.underline_functions = false	-- Disables underlining of function names to keep the interface clean.
-	opts.current_line_bg = true			-- Highlights the background of the current line to maintain focus.
+	-- Choose the style of Tokyonight
+	-- @style: String - Defines the Tokyonight variant to use.
+	-- Options:
+	--   'storm'   : Darker theme with a slight blue hue.
+	--   'night'   : Darker theme with vibrant colors.
+	--   'day'     : Light theme for daytime coding.
+	opts.style = 'storm'
+
+	-- Apply background transparency
+	-- @transparent_background: Boolean - Determines whether the background is transparent.
+	opts.transparent_background = false
+
+	-- Enable terminal colors to match the colorscheme
+	-- @term_colors: Boolean - Ensures that terminal colors follow the colorscheme.
+	opts.term_colors = true
+
+	-- Enable integrations with various plugins
+
+	-- Treesitter integration
+	-- @treesitter: Boolean - Enables integration with Treesitter for enhanced syntax highlighting.
+	opts.integrations.treesitter = true
+
+	-- Native LSP integration
+	-- @native_lsp: Table - Configures the integration with Neovim's native LSP client.
+	opts.integrations.native_lsp = true
+
+	-- Additional plugin integrations
+	-- @integrations: Table - Enables and configures integrations for other popular plugins.
+	opts.integrations.cmp = true
+	opts.integrations.gitsigns = true
+	opts.integrations.telescope = true
+	opts.integrations.nvimtree = true
 
 	-- Apply the colorscheme
-	-- This command sets the TokyoNight colorscheme with the specified style and options.
-	vim.cmd[[colorscheme tokyonight]]
-
-	-- Set up TokyoNight with the configured options
-	tokyonight.setup(opts)
+	-- This command activates the Tokyonight colorscheme with the specified options.
+	vim.cmd.colorscheme('tokyonight')
 
 	-- Additional Neovim visual settings
 	-- These settings enhance the overall visual experience by enabling 24-bit colors and highlighting.
-	vim.opt.termguicolors = true	-- Enables 24-bit RGB colors in the terminal.
-	vim.opt.cursorline = true		-- Highlights the current line where the cursor is located.
-	vim.opt.background = "dark"		-- Sets the background to dark mode, matching the TokyoNight theme.
+	vim.opt.termguicolors = true  -- Enables 24-bit RGB colors in the terminal.
+	vim.opt.background = "dark"   -- Sets the background to dark mode, matching Tokyonight's default.
+	vim.opt.cursorline = true     -- Highlights the current line where the cursor is located.
 
-	-- Customize diagnostic colors
-	-- These settings adjust the color of diagnostic messages (e.g., errors, warnings) to ensure they are easily distinguishable.
-	vim.cmd([[
-		highlight DiagnosticError guifg=#ff5370
-		highlight DiagnosticWarn guifg=#ffc777
-		highlight DiagnosticInfo guifg=#82aaff
-		highlight DiagnosticHint guifg=#c3e88d
-	]])
+	-- Return the configured options
+	-- @return: The modified opts table with updated configurations.
+	return opts
 end
 
--- Return the complete configuration table.
--- This table is required by lazy.nvim to properly configure and load the plugin.
+-- Return the complete configuration table
+-- This is required by lazy.nvim to properly configure and load the plugin.
+-- @return: Table - The plugin configuration to be loaded by lazy.nvim.
 return plugin
