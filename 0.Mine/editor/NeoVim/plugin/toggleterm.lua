@@ -90,7 +90,7 @@ plugin.opts = function(_, opts)
 	-- @winblend: Integer (0-100) - Controls the transparency of the floating terminal.
 	-- 0: Fully opaque, no transparency.
 	-- 100: Fully transparent, invisible terminal.
-	opts.float_opts.winblend = 3
+	opts.float_opts.winblend = 0
 
 	-- Define custom highlight groups for the floating terminal
 	-- @highlights: Table - A table containing custom highlight groups for floating terminal elements.

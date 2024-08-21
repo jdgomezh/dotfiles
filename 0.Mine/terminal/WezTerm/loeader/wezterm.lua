@@ -91,7 +91,7 @@ config.cell_width = 1.0
 -- @option: color_scheme
 -- @values: String (name of the color scheme, e.g., 'Gruvbox Dark', 'Solarized Light')
 -- @impact: Changes the color palette used for text and background in the terminal.
-config.color_scheme = 'tokyonight'
+config.color_scheme = 'Monokai Pro (Gogh)'
 
 -- Define custom colors for the terminal.
 -- @option: colors
@@ -107,43 +107,105 @@ config.color_scheme = 'tokyonight'
 --   - ansi: Array of ANSI colors (8 colors, hex color codes)
 --   - brights: Array of bright ANSI colors (8 colors, hex color codes)
 -- @impact: Sets custom colors for various elements in the terminal, providing a personalized look and feel.
+-- config.colors = {
+-- 	foreground = '#C0CAF5',
+-- 	background = '#1A1B26',
+-- 	cursor_bg = '#C0CAF5',
+-- 	cursor_fg = '#1A1B26',
+-- 	cursor_border = '#C0CAF5',
+-- 	selection_fg = '#C0CAF5',
+-- 	selection_bg = '#283457',
+-- 	scrollbar_thumb = '#292E42',
+-- 	split = '#7AA2F7',
+-- 	compose_cursor = '#FF9E64',
+-- 	ansi = {'#15161E', '#F7768E', '#9ECE6A', '#E0AF68', '#7AA2F7', '#BB9AF7', '#7DCFFF', '#A9B1D6'},
+-- 	brights = {'#414868', '#F7768E', '#9ECE6A', '#E0AF68', '#7AA2F7', '#BB9AF7', '#7DCFFF', '#C0CAF5'},
+-- 	tab_bar = {
+-- 		inactive_tab_edge = '#16161E',
+-- 		background = '#1A1B26',
+-- 		active_tab = {
+-- 			fg_color = '#16161E',
+-- 			bg_color = '#7AA2F7',
+-- 		},
+-- 		inactive_tab = {
+-- 			fg_color = '#545C7E',
+-- 			bg_color = '#292E42',
+-- 		},
+-- 		inactive_tab_hover = {
+-- 			fg_color = '#7AA2F7',
+-- 			bg_color = '#292E42',
+-- 			-- intensity = 'Bold',
+-- 		},
+-- 		new_tab_hover = {
+-- 			fg_color = '#7AA2F7',
+-- 			bg_color = '#1A1B26',
+-- 			intensity = 'Bold',
+-- 		},
+-- 		new_tab = {
+-- 			fg_color = '#7AA2F7',
+-- 			bg_color = '#1A1B26',
+-- 		},
+-- 	},
+-- }
 config.colors = {
-	foreground = '#C0CAF5',
-	background = '#1A1B26',
-	cursor_bg = '#C0CAF5',
-	cursor_fg = '#1A1B26',
-	cursor_border = '#C0CAF5',
-	selection_fg = '#C0CAF5',
-	selection_bg = '#283457',
-	scrollbar_thumb = '#292E42',
-	split = '#7AA2F7',
-	compose_cursor = '#FF9E64',
-	ansi = {'#15161E', '#F7768E', '#9ECE6A', '#E0AF68', '#7AA2F7', '#BB9AF7', '#7DCFFF', '#A9B1D6'},
-	brights = {'#414868', '#F7768E', '#9ECE6A', '#E0AF68', '#7AA2F7', '#BB9AF7', '#7DCFFF', '#C0CAF5'},
+	foreground = '#C5C8C6',  -- Color principal del texto
+	background = '#1D1F21',  -- Color de fondo
+	cursor_bg = '#AEAFAD',   -- Color de fondo del cursor
+	cursor_fg = '#1D1F21',   -- Color de texto del cursor
+	cursor_border = '#AEAFAD', -- Color del borde del cursor
+	selection_fg = '#1D1F21', -- Color de texto seleccionado
+	selection_bg = '#373B41', -- Color de fondo del texto seleccionado
+	scrollbar_thumb = '#282A2E', -- Color de la barra de desplazamiento
+	split = '#5F819D',       -- Color de la línea divisoria entre paneles
+	compose_cursor = '#FFCC66', -- Color del cursor de composición
+
+	-- Colores ANSI
+	ansi = {
+		'#1D1F21', -- Negro
+		'#CC6666', -- Rojo
+		'#B5BD68', -- Verde
+		'#F0C674', -- Amarillo
+		'#81A2BE', -- Azul
+		'#B294BB', -- Magenta
+		'#8ABEB7', -- Cian
+		'#C5C8C6', -- Blanco
+	},
+	
+	-- Colores ANSI brillantes
+	brights = {
+		'#666666', -- Negro brillante
+		'#D54E53', -- Rojo brillante
+		'#B9CA4A', -- Verde brillante
+		'#E7C547', -- Amarillo brillante
+		'#7AA6DA', -- Azul brillante
+		'#C397D8', -- Magenta brillante
+		'#70C0B1', -- Cian brillante
+		'#EAEAEA', -- Blanco brillante
+	},
+
+	-- Colores de la barra de pestañas
 	tab_bar = {
-		inactive_tab_edge = '#16161E',
-		background = '#1A1B26',
+		background = '#1D1F21', -- Fondo de la barra de pestañas
 		active_tab = {
-			fg_color = '#16161E',
-			bg_color = '#7AA2F7',
+			bg_color = '#282A2E', -- Fondo de la pestaña activa
+			fg_color = '#C5C8C6', -- Texto de la pestaña activa
 		},
 		inactive_tab = {
-			fg_color = '#545C7E',
-			bg_color = '#292E42',
+			bg_color = '#373B41', -- Fondo de la pestaña inactiva
+			fg_color = '#707880', -- Texto de la pestaña inactiva
 		},
 		inactive_tab_hover = {
-			fg_color = '#7AA2F7',
-			bg_color = '#292E42',
-			-- intensity = 'Bold',
-		},
-		new_tab_hover = {
-			fg_color = '#7AA2F7',
-			bg_color = '#1A1B26',
-			intensity = 'Bold',
+			bg_color = '#282A2E', -- Fondo de la pestaña inactiva cuando se pasa el mouse
+			fg_color = '#C5C8C6', -- Texto de la pestaña inactiva cuando se pasa el mouse
 		},
 		new_tab = {
-			fg_color = '#7AA2F7',
-			bg_color = '#1A1B26',
+			bg_color = '#1D1F21', -- Fondo del botón de nueva pestaña
+			fg_color = '#C5C8C6', -- Texto del botón de nueva pestaña
+		},
+		new_tab_hover = {
+			bg_color = '#282A2E', -- Fondo del botón de nueva pestaña cuando se pasa el mouse
+			fg_color = '#C5C8C6', -- Texto del botón de nueva pestaña cuando se pasa el mouse
+			intensity = 'Bold',   -- Intensidad del texto del botón de nueva pestaña cuando se pasa el mouse
 		},
 	},
 }
