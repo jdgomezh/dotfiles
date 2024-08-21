@@ -175,6 +175,90 @@ PATH="${OMNISHARP_DIR}:${PATH}"
 
 
 # //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
+# NERD FONTS CONFIGURATION
+# ==================================================================================================================================== #
+NERD_FONTS=(
+	"VictorMono		https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/VictorMono.zip"
+	"FiraCode		https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip"
+	"JetBrainsMono	https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip"
+	"IosevkaTerm	https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/IosevkaTerm.zip"
+)
+
+UPDATE_NERD_FONTS_CACHE=0
+for FONT_INFO in "${NERD_FONTS[@]}"; do
+	FONT_NAME=$(echo "${FONT_INFO}" | awk '{print $1}')
+	FONT_URL=$(echo "${FONT_INFO}" | awk '{print $2}')
+
+	if [ ! -d "${XDG_FONTS_HOME}/${FONT_NAME}" ]; then
+		NERD_FONTS_TEMP_DIR=$(mktemp -d)
+		curl -L "${FONT_URL}" -o "${NERD_FONTS_TEMP_DIR}/${FONT_NAME}.zip"
+		unzip "${NERD_FONTS_TEMP_DIR}/${FONT_NAME}.zip" -d "${XDG_FONTS_HOME}/${FONT_NAME}"
+		rm -rf "${NERD_FONTS_TEMP_DIR}"
+		UPDATE_NERD_FONTS_CACHE=1
+	fi
+done
+
+if [ ${UPDATE_NERD_FONTS_CACHE} -eq 1 ]; then fc-cache -f -v; fi
+# ==================================================================================================================================== #
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #
+
+
+# //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
+# ADITIONAL FONTS CONFIGURATION (FOR POWERLEVEL10K)
+# ==================================================================================================================================== #
+# Install additional fonts
+ADDITIONAL_FONTS=(
+	"FontAwesome	https://use.fontawesome.com/releases/v5.15.4/fontawesome-free-5.15.4-desktop.zip"
+	"SourceCodePro	https://github.com/adobe-fonts/source-code-pro/archive/refs/heads/main.zip"
+	"Powerline		https://github.com/powerline/fonts/archive/refs/heads/master.zip"
+)
+
+UPDATE_ADITIONAL_FONTS_CACHE=0
+for FONT_INFO in "${ADDITIONAL_FONTS[@]}"; do
+	FONT_NAME=$(echo "${FONT_INFO}" | awk '{print $1}')
+	FONT_URL=$(echo "${FONT_INFO}" | awk '{print $2}')
+
+	if [ ! -d "${XDG_FONTS_HOME}/${FONT_NAME}" ]; then
+		ADDITIONAL_FONTS_TEMP_DIR=$(mktemp -d)
+		curl -L "${FONT_URL}" -o "${ADDITIONAL_FONTS_TEMP_DIR}/${FONT_NAME}.zip"
+		unzip "${ADDITIONAL_FONTS_TEMP_DIR}/${FONT_NAME}.zip" -d "${XDG_FONTS_HOME}/${FONT_NAME}"
+		rm -rf "${ADDITIONAL_FONTS_TEMP_DIR}"
+		UPDATE_ADITIONAL_FONTS_CACHE=1
+	fi
+done
+
+if [ ${UPDATE_ADITIONAL_FONTS_CACHE} -eq 1 ]; then fc-cache -f -v; fi
+# ==================================================================================================================================== #
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #
+
+
+# //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
+# MESLOLGS NF CONFIGURATION (FOR POWERLEVEL10K)
+# ==================================================================================================================================== #
+MESLOLGS_FONTS_DIR="${XDG_FONTS_HOME}/MesloLGS_NF"
+
+if [ ! -d "${MESLOLGS_FONTS_DIR}" ]; then
+	UPDATE_MESLOLGS_FONTS_CACHE=0
+	MESLOLGS_FONTS=(
+		"https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+		"https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+		"https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+		"https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+	)
+
+	mkdir -p "${MESLOLGS_FONTS_DIR}"
+	for FONT_URL in "${MESLOLGS_FONTS[@]}"; do
+		curl -L "${FONT_URL}" -o "${MESLOLGS_FONTS_DIR}/$(basename ${FONT_URL})"
+		UPDATE_MESLOLGS_FONTS_CACHE=1
+	done
+
+	if [ ${UPDATE_MESLOLGS_FONTS_CACHE} -eq 1 ]; then fc-cache -f -v; fi
+fi
+# ==================================================================================================================================== #
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #
+
+
+# //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
 # NEOVIM CONFIGURATION
 # ==================================================================================================================================== #
 export NEOVIM_DIR="/opt/nvim-linux64"
