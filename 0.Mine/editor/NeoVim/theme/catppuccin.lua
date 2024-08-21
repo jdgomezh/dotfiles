@@ -147,12 +147,12 @@ plugin.opts = function(_, opts)
 
 	-- Apply the colorscheme
 	-- This command activates the Catppuccin colorscheme with the specified options.
-	vim.cmd.colorscheme('catppuccin-frappe')
+	vim.cmd.colorscheme('catppuccin-' .. opts.flavour)
 
 	-- Additional Neovim visual settings
 	-- These settings enhance the overall visual experience by enabling 24-bit colors and highlighting.
 	vim.opt.termguicolors = true	-- Enables 24-bit RGB colors in the terminal.
-	--vim.opt.background = "dark"		-- Sets the background to dark mode, matching the Monokai theme.
+	vim.opt.background = "dark"		-- Sets the background to dark mode, matching the Monokai theme.
 	vim.opt.cursorline = true		-- Highlights the current line where the cursor is located.
 
 	-- Return the configured options

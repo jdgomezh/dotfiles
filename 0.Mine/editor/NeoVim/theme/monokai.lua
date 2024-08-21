@@ -76,7 +76,7 @@ plugin.opts = function(_, opts)
 
 	-- Apply the colorscheme
 	-- This command activates the Monokai colorscheme with the specified options.
-	vim.cmd.colorscheme('monokai')
+	vim.cmd.colorscheme('monokai_' .. opts.style)
 
 	-- Customize diagnostic colors
 	-- These settings adjust the color of diagnostic messages (e.g., errors, warnings) to ensure they are easily distinguishable.

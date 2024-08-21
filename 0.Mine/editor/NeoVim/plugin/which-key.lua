@@ -3,6 +3,7 @@
 -- The win is configured to appear centered both vertically and horizontally over the buffer content.
 
 -- Define the main configuration table for the plugin
+-- @plugin: Table - The main table that holds the plugin configuration.
 local plugin = {}
 
 -- Specify the plugin repository
@@ -23,10 +24,11 @@ plugin.opts = function(_, opts)
 	opts.layout.height = opts.layout.height or {}
 
 	-- Override default configurations for the which-key win appearance
-
 	-- The 'win' table contains settings related to the visual appearance of the floating win.
+
 	-- Set the title of the which-key win
-	-- @title: String or nil - Removes the title if any
+	-- @title: String or nil - The title displayed at the top of the which-key floating win.
+	-- Set to an empty string to remove the title.
 	opts.win.title = ''
 
 	-- Set the border style for the floating win
@@ -46,7 +48,7 @@ plugin.opts = function(_, opts)
 
 	-- Configure the layout of the which-key content within the win
 	-- The 'layout' table contains settings related to the arrangement of content within the which-key win.
-	
+
 	-- Show help message at the bottom of the which-key win
 	-- @show_help: Boolean - Determines whether a help message is displayed at the bottom of the which-key win.
 	-- true: Show the help message.
@@ -56,6 +58,31 @@ plugin.opts = function(_, opts)
 	-- Return the configured options
 	-- @return: The modified opts table with updated configurations.
 	return opts
+end
+
+-- Function to define key mappings
+-- This function sets up key bindings for the plugin using the lazy.nvim keys field.
+-- @param self: LazyPlugin - The plugin object that is being configured.
+-- @param keys: Table - A table containing the existing key mappings.
+plugin.keys = function(_, keys)
+	-- Load the which-key module to manage key mappings
+	local wk = require("which-key")
+
+	-- Add key bindings for the plugin
+	-- @group: String - The name of the group under which the key binding will be categorized.
+	wk.add({
+		-- Define a group named 'tool' under the leader key '<leader>T'
+		-- This can be used to group related key mappings for tools.
+		{ "<leader>T", group = "tool" },
+
+		-- Define a group named 'terminal' under the leader key '<leader>Tt'
+		-- This can be used to group related key mappings for terminal commands.
+		{ "<leader>Tt", group = "terminal" },
+	})
+	
+	-- Return the modified keys table
+	-- @return: Table - The updated keys table with new key mappings.
+	return keys
 end
 
 -- Return the complete configuration table
