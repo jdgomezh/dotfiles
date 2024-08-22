@@ -86,3 +86,10 @@ Symlink to create by SSH:
 ```shell
 ln -sf "${ENV_ROOT}/Conf/0.Mine/tool/SSH/config/config" "${HOME}/.ssh/config"
 ```
+
+Symlink to create by Obsidian:
+```shell
+ln -sf "${ENV_ROOT}/Conf/0.Mine/tool/Obsidian/config/ffdfe0a9ad35e092.json" "${XDG_CONFIG_HOME}/obsidian/ffdfe0a9ad35e092.json"
+ln -sf "${ENV_ROOT}/Conf/0.Mine/tool/Obsidian/config/obsidian.prs-jdgomezh-desktop.json" "${XDG_CONFIG_HOME}/obsidian/obsidian.json"
+ln -sf "${ENV_ROOT}/Conf/0.Mine/tool/Obsidian/config/Preferences" "${XDG_CONFIG_HOME}/obsidian/Preferences"
+```
