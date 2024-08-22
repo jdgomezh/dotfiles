@@ -14,7 +14,7 @@ plugin[1] = "nvim-telescope/telescope-file-browser.nvim"
 -- @dependencies: Table - List of dependencies required by telescope-file-browser.nvim.
 -- 'nvim-telescope/telescope.nvim': Required dependency, as file-browser is an extension of Telescope.
 plugin.dependencies = {
-	"nvim-telescope/telescope.nvim",
+	"telescope.nvim",
 }
 
 -- Function to configure the plugin
@@ -22,6 +22,9 @@ plugin.dependencies = {
 -- @param self: LazyPlugin - The plugin object that is being configured.
 -- @param opts: Table - A table containing the options for configuring telescope-file-browser.
 plugin.config = function(_, opts)
+	local Util = require("lazy.core.util")
+	Util.lazy_require("telescope")
+
 	-- Load Telescope module
 	local telescope = require("telescope")
 

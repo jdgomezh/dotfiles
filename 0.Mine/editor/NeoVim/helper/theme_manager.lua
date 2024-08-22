@@ -54,7 +54,7 @@ function ThemeManager.init(theme_name)
 
 	return {
 		get_theme_config_file = function()
-			return 'theme.' .. theme_name
+			return 'themes.' .. theme_name
 		end,
 		get_plugin_theme = function()
 			return theme_config.plugin

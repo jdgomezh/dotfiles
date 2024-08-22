@@ -162,11 +162,9 @@ vim.opt.shiftwidth = 4
 -- @impact: Makes editing operations (like inserting a tab) use the defined number of spaces.
 vim.opt.softtabstop = 4
 
-vim.g.python3_host_prog = "pip"
-
-vim.g.mason_yarn_install_cmd = "yarn global add"
-
-vim.g.mason_node_install_cmd = "yarn global add"
+-- vim.g.python3_host_prog = "pip"
+-- vim.g.mason_yarn_install_cmd = "yarn global add"
+-- vim.g.mason_node_install_cmd = "yarn global add"
 
 
 -- Enable syntax highlighting.

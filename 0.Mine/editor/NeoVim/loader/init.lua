@@ -13,6 +13,19 @@
 --     'gruvbox': A retro groove color scheme.
 local selected_theme = 'monokai'
 
+-- Map Space as leader key
+-- The leader key is used as a prefix for custom keybindings.
+-- @mapleader: Space - Leader key for custom keybindings
+vim.g.mapleader = ' '
+
+-- Map Space as local leader key
+-- The local leader key is used as a prefix for custom keybindings within plugins.
+-- @maplocalleader: Space - Local leader key for custom keybindings
+vim.g.maplocalleader = ' '
+
+-- Ensure space is not mapped to anything else
+vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
+
 -- Base Configuration Paths
 -- @global CONFIG_PATHS: Table - Stores paths used for plugin and lazy loader configuration.
 --   Fields:
@@ -58,11 +71,6 @@ package.path = table.concat({
 -- Add the configuration directory to the runtime path
 -- This allows Neovim to locate configuration files located in the config_base directory.
 vim.opt.rtp:prepend(_G.PATHS.config_base)
-
--- Load core configurations
--- These are essential settings and key mappings required for Neovim's operation.
-require('config.options')  -- General Neovim options such as line numbers, encoding, etc.
-require('config.keymaps')  -- Custom key mappings for improved workflow.
 
 -- Initialize Plugin Management with lazy.nvim
 -- This section checks if lazy.nvim is installed, and if not, installs it.
@@ -122,9 +130,9 @@ lazy.setup({
 		-- Plugins Coding
 		{ import = 'lazyvim.plugins.extras.coding.mini-surround', lazy = true },
 		{ import = 'lazyvim.plugins.extras.coding.mini-comment', lazy = true },
-		-- { import = 'lazyvim.plugins.extras.coding.copilot-chat', lazy = true, cmd = 'Copilot' },
-		-- { import = 'lazyvim.plugins.extras.coding.copilot', lazy = true },
-		-- { import = 'lazyvim.plugins.extras.coding.codeium', lazy = true },
+		{ import = 'lazyvim.plugins.extras.coding.copilot-chat', lazy = true, cmd = 'Copilot' },
+		{ import = 'lazyvim.plugins.extras.coding.copilot', lazy = true },
+		{ import = 'lazyvim.plugins.extras.coding.codeium', lazy = true },
 		{ import = 'lazyvim.plugins.extras.coding.luasnip', lazy = true },
 		{ import = 'lazyvim.plugins.extras.coding.neogen', lazy = true, cmd = 'Neogen' },
 		{ import = 'lazyvim.plugins.extras.coding.yanky', lazy = true },
@@ -173,11 +181,42 @@ lazy.setup({
 		-- { import = 'lazyvim.plugins.extras.lang.go', lazy = true },
 		-- { import = 'lazyvim.plugins.extras.lang.r', lazy = true },
 		-- Disableds
-		{ 'iamcco/markdown-preview.nvim', disabled = true, enabled = false },
-		{ 'telescope-fzf-native.nvim', disabled = true, enabled = false },
+		-- { 'iamcco/markdown-preview.nvim', disabled = true, enabled = false },
+		-- { 'telescope-fzf-native.nvim', disabled = true, enabled = false },
 		-- Plugins and Settings
-		{ import = _G.CONFIG_PATHS.plugin },
+		{ import = _G.CONFIG_PATHS.plugin, lazy = true },
 		-- Theme
-		{ import = _G.theme_manager.get_theme_config_file() },
+		{ import = _G.theme_manager.get_theme_config_file(), lazy = true },
+	},
+	defaults = {
+		lazy = true,
+		version = false,
+		--version = "*",
+	},
+	checker = { enabled = true },
+	performance = {
+		rtp = {
+			-- disable some rtp plugins
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
 	},
 })
+
+-- Load core configurations
+-- These are essential settings and key mappings required for Neovim's operation.
+require('config.alpha')
+require('config.telescope')
+require('config.lualine')
+require('option.global')
+
+-- require('config.lsp')
+-- require('config.cmp')

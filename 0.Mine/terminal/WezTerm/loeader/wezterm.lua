@@ -256,7 +256,7 @@ config.enable_tab_bar = true
 -- @option: hide_tab_bar_if_only_one_tab
 -- @values: true (Enable), false (Disable)
 -- @impact: Hides the tab bar when only one tab is open, providing a cleaner interface.
-config.hide_tab_bar_if_only_one_tab = false
+config.hide_tab_bar_if_only_one_tab = true
 -- ==================================================================================================================================== #
 -- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #
 

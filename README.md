@@ -69,7 +69,7 @@ Symlink to create by NeoVim:
 mkdir -p "${XDG_CONFIG_HOME}/nvim/lua"
 ln -sf "${ENV_ROOT}/Conf/0.Mine/editor/NeoVim/loader/init.lua" "${XDG_CONFIG_HOME}/nvim/init.lua"
 ln -sf "${ENV_ROOT}/Conf/0.Mine/editor/NeoVim/plugin" "${XDG_CONFIG_HOME}/nvim/lua/plugin"
-ln -sf "${ENV_ROOT}/Conf/0.Mine/editor/NeoVim/theme" "${XDG_CONFIG_HOME}/nvim/lua/theme"
+ln -sf "${ENV_ROOT}/Conf/0.Mine/editor/NeoVim/themes" "${XDG_CONFIG_HOME}/nvim/lua/themes"
 ```
 
 Symlink to create by WezTerm:
