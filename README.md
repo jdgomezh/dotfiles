@@ -28,7 +28,7 @@ sudo apt install -y build-essential libcurl4-openssl-dev libssl-dev libxml2-dev 
 
 Para que corran los scripts internos:
 ```shell
-sudo apt install curl wget unzip fontconfig neofetch git zsh
+sudo apt install curl wget unzip fontconfig neofetch git zsh lsd bat
 ```
 
 Required export:
