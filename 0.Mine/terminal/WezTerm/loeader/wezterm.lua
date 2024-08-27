@@ -6,10 +6,24 @@
 -- Import WezTerm API
 -- This allows us to configure WezTerm using its provided functions and options.
 local wezterm = require 'wezterm'
+local mux = wezterm.mux
 
 -- Main configuration table
 -- This table contains all the configuration options for WezTerm.
 local config = {}
+
+
+-- //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
+-- WINDOW SIZE CONFIGURATION
+-- ==================================================================================================================================== #
+-- Set the window for maximized mode.
+wezterm.on("gui-startup", function()
+	local tab, pane, window = mux.spawn_window{}
+	window:gui_window():maximize()
+end)
+-- ==================================================================================================================================== #
+-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #
+
 
 -- //////////////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ #
 -- FONT CONFIGURATION
