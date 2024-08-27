@@ -94,6 +94,7 @@ ln -sf "${ENV_ROOT}/Conf/0.Mine/terminal/Kitty/config/kitty.conf" "${XDG_CONFIG_
 
 Symlink to create by SSH:
 ```shell
+mkdir -p "${HOME}/.ssh"
 ln -sf "${ENV_ROOT}/Conf/0.Mine/tool/SSH/config/config" "${HOME}/.ssh/config"
 ```
 
