@@ -26,10 +26,20 @@ sudo apt install -y dirmngr gnupg apt-transport-https software-properties-common
 sudo apt install -y build-essential libcurl4-openssl-dev libssl-dev libxml2-dev cmake clang
 ```
 
+Para que corran los scripts internos:
+```shell
+sudo apt install curl wget unzip fontconfig neofetch git zsh
+```
 
 Required export:
 ```shell
 export ENV_ROOT="/-"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+```
+
+Symlink básico:
+```shell
+ln -sf "${ENV_ROOT}" "${HOME}/-"
 ```
 
 Symlinks to create by posix:
