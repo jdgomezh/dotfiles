@@ -26,9 +26,25 @@ sudo apt install -y dirmngr gnupg apt-transport-https software-properties-common
 sudo apt install -y build-essential libcurl4-openssl-dev libssl-dev libxml2-dev cmake clang
 ```
 
-Para que corran los scripts internos:
+Basic dependencies:
 ```shell
-sudo apt install curl wget zip unzip fontconfig neofetch git zsh lsd bat
+sudo apt install curl wget zip unzip fontconfig neofetch git zsh lsd bat gnupg apt-transport-https openssh-client
+```
+
+Powershell Core (pwsh) required:
+```shell
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/debian/$(lsb_release -cs)/prod $(lsb_release -cs) main" > /etc/apt/sources.list.d/microsoft-powershell.list'
+sudo apt update
+sudo apt install -y powershell
+pwsh --version
+```
+
+or download with:
+```shell
+wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.5/powershell_7.4.5-1.deb_amd64.deb
+sudo dpkg -i powershell_7.4.5-1.deb_amd64.deb
+sudo apt-get install -f
 ```
 
 Required export:
