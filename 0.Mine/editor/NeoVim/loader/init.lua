@@ -76,14 +76,25 @@ vim.opt.rtp:prepend(_G.PATHS.config_base)
 -- This section checks if lazy.nvim is installed, and if not, installs it.
 -- lazy.nvim is a plugin manager designed to efficiently load Neovim plugins.
 if not vim.loop.fs_stat(_G.CONFIG_PATHS.lazy_loader) then
-	vim.fn.system({
+	local lazy_repo = 'https://github.com/folke/lazy.nvim.git'
+	local out = vim.fn.system({
 		'git',
 		'clone',
 		'--filter=blob:none',
-		'git@github.com:folke/lazy.nvim.git',
 		'--branch=stable',
+		lazy_repo,
 		_G.CONFIG_PATHS.lazy_loader,
 	})
+
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 
 -- Load lazy.nvim
