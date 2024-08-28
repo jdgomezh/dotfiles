@@ -66,7 +66,7 @@
 	# ---------------------------------------------------------------------------------------------------------------------------- #
 	# => mkdir -p <path>
 	# => ssh-keygen -o -a 5000 -t ed25519 -f <path>/<name> -C "<comment>"
-	Match Exec "${ENV_ROOT}/Conf/0.Mine/tool/SSH/script/match.ps1 '.*gitlab.com:gkodo.*' '.*/Repo/2.Brand/GKodo(/.*)'"
+	Match Exec "${ENV_ROOT}/Conf/0.Mine/tool/SSH/script/match.ps1 '.*gitlab.com:gkodo/.*' '.*/Repo/2.Brand/GKodo(/.*)?'"
 		IdentityFile ${ENV_ROOT}/Safe/0.Mine/tool/SSH/com/repo/git/gitlab/dvc.jdgomezh@gmail.com
 	# **************************************************************************************************************************** #
 
@@ -78,10 +78,10 @@
 	# ---------------------------------------------------------------------------------------------------------------------------- #
 	# => mkdir -p <path>
 	# => ssh-keygen -o -a 5000 -t ed25519 -f <path>/<name> -C "<comment>"
-	Match Exec "${ENV_ROOT}/Conf/0.Mine/tool/SSH/script/match.ps1 '.*github.com:jdgomezh.*' '.*/Conf(/.*)'"
+	Match Exec "${ENV_ROOT}/Conf/0.Mine/tool/SSH/script/match.ps1 '.*github.com:jdgomezh/.*' '.*/Conf(/.*)?'"
 		IdentityFile ${ENV_ROOT}/Safe/0.Mine/tool/SSH/com/repo/git/github/dvc.jdgomezh@gmail.com
 	#
-	Match Exec "${ENV_ROOT}/Conf/0.Mine/tool/SSH/script/match.ps1 '.*github.com:jdgomezh.*' '.*/Repo/Mine(/.*)'"
+	Match Exec "${ENV_ROOT}/Conf/0.Mine/tool/SSH/script/match.ps1 '.*github.com:jdgomezh/.*' '.*/Repo/0.Mine(/.*)?'"
 		IdentityFile ${ENV_ROOT}/Safe/0.Mine/tool/SSH/com/repo/git/github/dvc.jdgomezh@gmail.com
 	# **************************************************************************************************************************** #
 
