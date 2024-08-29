@@ -148,7 +148,7 @@ function Convert-SshCommandToUri {
 			$sshUri = "ssh://$sshUri"
 		}
 
-		Write-Log -message "Converted SSH command ($sshCmd) to URI ($sshUri) with user ($userCmd), host ($hostCmd), port ($portCmd), and command ($commandCmd)."
+		# Write-Log -message "Converted SSH command ($sshCmd) to URI ($sshUri) with user ($userCmd), host ($hostCmd), port ($portCmd), and command ($commandCmd)."
 
 		# Return the formatted SSH URI
 		return $sshUri
@@ -214,7 +214,7 @@ function Main {
 		$isCommandPathMatched = $commandPath -match $pathPattern
 		$isSuccess = $isSshUriMatched -and $isCommandPathMatched
 
-		Write-Log -message "Success Matched $($isSuccess.ToString()) => (SSH URI Command: $sshUriCmd ~ SSH URI Pattern: $sshUriPattern = $($isSshUriMatched.ToString()) && Command Path: $commandPath ~ Command Path Pattern: $pathPattern = $($isCommandPathMatched.ToString()))"
+		# Write-Log -message "Success Matched $($isSuccess.ToString()) => (SSH URI Command: $sshUriCmd ~ SSH URI Pattern: $sshUriPattern = $($isSshUriMatched.ToString()) && Command Path: $commandPath ~ Command Path Pattern: $pathPattern = $($isCommandPathMatched.ToString()))"
 
 		# Validate the SSH URI and current directory against the provided patterns
 		if ($isSuccess) { exit 0 } else { exit 1 }
@@ -243,7 +243,7 @@ catch {
 	exit 1  # Ensure a non-zero exit code in case of failure
 }
 finally {
-	Write-Log -message "Script execution completed."
+	# Write-Log -message "Script execution completed."
 }
 # ==================================================================================================================================== #
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////////////////////////////// #

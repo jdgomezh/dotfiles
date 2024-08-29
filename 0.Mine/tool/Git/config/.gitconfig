@@ -1,5 +1,6 @@
 [user]
-	name = John D. Gómez H. <pro.jdgomezh@gmail.com>				# Nombre del usuario
+	name = John D. Gómez H. <pro.jdgomezh@gmail.com>
+	email = john.gomez@siigo.com
 
 [gpg]
 	program = gpg													# Programa GPG
