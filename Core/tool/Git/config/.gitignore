@@ -1,0 +1,390 @@
+# ######################################################################################################## #
+# Sistema Operativo
+# -------------------------------------------------------------------------------------------------------- #
+## Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+## macOS
+.DS_Store
+.AppleDouble
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+
+## Linux
+*~
+.*.swp
+.swo
+.directory
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# Archivos de Compilación y Salida
+# -------------------------------------------------------------------------------------------------------- #
+## General
+*.log
+*.aux
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.blg
+*.bbl
+*.run.xml
+*.synctex.gz
+*.bcf
+*.tdo
+
+## C/C++
+*.o
+*.obj
+*.dll
+*.exe
+*.so
+*.dylib
+*.lib
+*.a
+
+## Java
+*.class
+*.jar
+*.war
+*.ear
+
+## Python
+*.pyc
+*.pyo
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+
+## Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+## Ruby
+.bundle/
+vendor/bundle/
+*.gem
+log/
+tmp/
+.ruby-version
+.ruby-gemset
+
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.pdb
+*.cache
+*.ilk
+*.aps
+*.sln.docstates
+
+## Golang
+bin/
+*.exe
+
+## Rust
+target/
+
+## TypeScript
+*.js
+*.d.ts
+*.js.map
+*.tsbuildinfo
+
+## React
+build/
+dist/
+public/
+.DS_Store
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.gh-pages/
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# Dependencias y Paquetes
+# -------------------------------------------------------------------------------------------------------- #
+## General
+*.lock
+
+## Python
+venv/
+env/
+Pipfile.lock
+poetry.lock
+
+## Node.js
+node_modules/
+package-lock.json
+yarn.lock
+
+## .NET
+packages/
+project.lock.json
+project.fragment.lock.json
+
+## Golang
+vendor/
+
+## Rust
+Cargo.lock
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# Configuración del Entorno de Desarrollo
+# -------------------------------------------------------------------------------------------------------- #
+## General
+*.sublime-project
+*.sublime-workspace
+.idea/
+.vscode/
+
+## JetBrains IDEs
+.idea/
+
+## Visual Studio
+.vs/
+*.vcxproj.user
+*.csproj.user
+*.suo
+*.user
+*.dotCover
+*.dotTrace
+*.dotMemory
+*.vssettings
+
+## Eclipse
+.project
+.classpath
+.settings/
+
+## Intellij
+*.iml
+.idea/
+out/
+
+## NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# Herramientas y Entornos Específicos
+# -------------------------------------------------------------------------------------------------------- #
+## Docker
+*.env
+*.env.*
+docker-compose.override.yml
+.dockerignore
+
+## Kubernetes
+*.kube/config
+*.kube/cache/
+
+## Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+
+## Vagrant
+.vagrant/
+
+## Ansible
+*.retry
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.pdf
+*.dvi
+*.ps
+*.eps
+*.nav
+*.snm
+*.vrb
+*.out
+*.toc
+*.log
+*.lof
+*.lot
+*.thm
+*.maf
+*.mtc*
+*.mtc0
+*.spl
+*.run.xml
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# Otros
+# -------------------------------------------------------------------------------------------------------- #
+## MongoDB
+mongodump/
+
+## Task Managers
+*.pidb
+*.userprefs
+*.usertasks
+
+## Recycle Bin
+.BIN/
+
+## Yarn and NPM
+.yarn/
+coverage/
+
+## React and Vue
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## Syncthing
+.stfolder
+
+# Firebase
+.firebase/
+firestore.indexes.json
+firestore.rules
+storage.rules
+
+# Android
+*.apk
+*.ap_
+
+# Flutter
+**/build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+.packages
+.generated/
+
+# Swift
+build/
+DerivedData/
+*.ipa
+*.xcuserstate
+*.xcworkspace
+.xcconfig
+*.hmap
+*.ipa
+*.xcuserstate
+xcuserdata/
+
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Pp]rojectSettings/
+Packages/manifest.json
+Packages/packages-lock.json
+Assets/AssetStoreTools*
+
+# PHP
+vendor/
+composer.lock
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# Gradle
+# -------------------------------------------------------------------------------------------------------- #
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# IntelliJ IDEA
+# -------------------------------------------------------------------------------------------------------- #
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# Eclipse
+# -------------------------------------------------------------------------------------------------------- #
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# NetBeans
+# -------------------------------------------------------------------------------------------------------- #
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+# ======================================================================================================== #
+
+
+
+# ######################################################################################################## #
+# Visual Studio Code
+# -------------------------------------------------------------------------------------------------------- #
+.vscode/
+# ======================================================================================================== #

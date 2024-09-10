@@ -1,5 +1,5 @@
 [user]
-	name = John D. Gómez H.
+	name = John D. Gómez H. <pro.jdgomezh@gmail.com>				# Nombre del usuario
 
 [gpg]
 	program = gpg													# Programa GPG
@@ -18,21 +18,17 @@
 	autoSetupRemote = true											# Configura remoto automáticamente
 
 [merge]
-	conflictstyle = diff3											# Estilo de conflictos
 	autoStash = true												# Auto-stash cambios antes de merge
 	renames = true													# Detecta renombramientos
 	commit = yes													# Commits automáticamente
-	log = true														# Log de merge
+	log = 99999														# Número de commits en log de merge
 	ff = false														# No permitir fast-forward
 
-[blame]
-	showRoot = true													# Mostrar raíz de blame
-
 [commit]
-	#gpgsign = true													# Firma commits automáticamente
+	gpgsign = true													# Firma commits automáticamente
 
 [tag]
-	#gpgsign = true													# Firma tags automáticamente
+	gpgsign = true													# Firma tags automáticamente
 
 [diff]
 	colorMovedWS = ignore-all-space									# Ignorar espacios en bloques movidos
@@ -40,13 +36,8 @@
 	ignoreSpaceChange = false										# Ignorar cambios en la cantidad de espacios
 	ignoreAllSpace = false											# Ignorar todos los cambios de espacios
 	colorMoved = zebra												# Colorea bloques movidos
-	algorithm = histogram											# Algoritmo de diff
 	word-diff = color												# Colorea diff por palabras
 	renames = copies												# Detecta renombramientos y copias
-	tool = default-difftool											# Herramienta de diff por defecto
-	submodule = log													# Mostrar cambios en submódulos
-	binary = textconv												# Mostrar diff de binarios
-	wordRegex = \\w+
 
 [stash]
 	defaultRef = refs/stash/clean									# Rama de stash
@@ -55,7 +46,6 @@
 
 [status]
 	showUntrackedFiles = all										# Mostrar archivos no rastreados
-	submoduleSummary = true											# Mostrar resumen de submódulos
 	aheadbehind = true												# Mostrar commits adelante y atrás
 
 [color]
@@ -73,8 +63,8 @@
 
 [core]
 	editor = nvim													# Editor predeterminado
-	excludesfile = ~/-/Conf/0.Mine/tool/Git/config/.gitignore		# Archivo de exclusión
-	attributesfile = ~/-/Conf/0.Mine/tool/Git/config/.gitattributes	# Archivo de atributos
+	excludesfile = ~/-/Conf/Core/tool/Git/config/.gitignore			# Archivo de exclusión
+	attributesfile = ~/-/Conf/Core/tool/Git/config/.gitattributes	# Archivo de atributos
 	ignorecase = false												# Distinguir mayúsculas y minúsculas
 	symlinks = true													# No seguir enlaces simbólicos
 	autocrlf = input												# Conversión de fin de línea
@@ -82,28 +72,12 @@
 
 [rebase]
 	autoStash = true												# Auto-stash cambios antes de rebase
-	autoSquash = true												# Autosquash commits
+	autosquash = true												# Autosquash commits
 	preserveMerges = true											# Preservar merges
 
-[interactive]
-	diffFilter = color.diff-highlight								# Filtro de diff interactivo
-
-[delta]
-	features = navigate												# Características de delta
-	side-by-side = true												# Mostrar diff lado a lado
-	navigate = true													# Navegación en diff
-	line-numbers = true												# Números de línea
-
 [alias]
-	# Log de merges con gráfico
-	log-merges-graph = "!git log --merges --graph --oneline --color=always --format='%C(auto)%h%C(bold white) %s%C(brightblue) %an%C(dim magenta) (%cs)%C(dim green)'"
-	# Log gráfico
-	log-graph = "!git log --graph --oneline --color=always --format='%C(auto)%h%C(bold white) %s%C(brightblue) %an%C(dim magenta) (%cs)%C(dim green)'"
-	# Log de merges sin gráfico
-	log-merges = "!git log --merges --oneline --color=always --format='%C(auto)%h%C(bold white) %s%C(brightblue) %an%C(dim magenta) (%cs)%C(dim green)'"	
-	# Log sin merges ni gráfico
-	log-simple = "!git log --oneline --color=always --format='%C(auto)%h%C(bold white) %s%C(brightblue) %an%C(dim magenta) (%cs)%C(dim green)'"
-	#
+	# Historial gráfico
+	lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset)%C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
 	co = checkout													# Cambiar a rama/estado
 	ci = commit														# Crear commit
 	st = status														# Estado actual
@@ -143,18 +117,18 @@
 		git branch -a -vv --color=always | column -t; \
 	}; f"
 
-[includeIf "gitdir/i:**/Repo/4.Entity/Memory/**"]
-	path = ~/-/Conf/4.Entity/Memory/tool/Git/config/include.gitconfig
+[includeIf "gitdir/i:**/Repo/Corp/memory/**"]
+	path = ~/-/Conf/Corp/memory/tool/Git/.gitconfig
 
-[includeIf "gitdir/i:**/Repo/4.Entity/SIIGO/**"]
-	path = ~/-/Conf/4.Entity/SIIGO/tool/Git/config/include.gitconfig
+[includeIf "gitdir/i:**/Repo/Corp/siigo/**"]
+	path = ~/-/Conf/Corp/siigo/tool/Git/.gitconfig
 
-[includeIf "gitdir/i:**/Repo/2.Brand/GKodo/**"]
-	path = ~/-/Conf/2.Brand/GKodo/tool/Git/config/include.gitconfig
+[includeIf "gitdir/i:**/Repo/Nick/gkodo/**"]
+	path = ~/-/Conf/Nick/gkodo/tool/Git/.gitconfig
 
-[includeIf "gitdir/i:**/Repo/0.Mine/**"]
-	path = ~/-/Conf/0.Mine/tool/Git/config/include.gitconfig
+[includeIf "gitdir/i:**/Repo/Mine/**"]
+	path = ~/-/Conf/Mine/tool/Git/.gitconfig
 
 [includeIf "gitdir/i:**/Conf/**"]
-	path = ~/-/Conf/0.Mine/tool/Git/config/include.gitconfig
+	path = ~/-/Conf/Mine/tool/Git/.gitconfig
 
